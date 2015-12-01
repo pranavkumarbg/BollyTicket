@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
+import com.phpnew_pranavkumar.farmerproject.adapter.PopularAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
@@ -29,44 +30,34 @@ import java.util.ArrayList;
 /**
  * Created by kehooo on 11/28/2015.
  */
-public class NewReleaseActivity extends AppCompatActivity {
+public class PopularActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    private StaggeredGridLayoutManager gaggeredGridLayoutManager;
-
-    NewReleaseAdapter mAdapter;
-
+    PopularAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newrealese);
+        setContentView(R.layout.popular);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarrls);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarpp);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
-        //ab.setHomeAsUpIndicator(R.drawable.ic_home);
-        ab.setTitle("New Release");
+        ab.setTitle("Popular");
         ab.setDisplayHomeAsUpEnabled(true);
-
-       // new DownloadJSON().execute();
 
         Intent i = this.getIntent();
         ArrayList<MovieData> feedMovieList =  i.getParcelableArrayListExtra("cars");
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.list);
+        mRecyclerView = (RecyclerView)findViewById(R.id.listpp);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 
-        //gaggeredGridLayoutManager= new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
-
-
-        // StaggeredGridLayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2,1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
+        mAdapter = new PopularAdapter(getApplicationContext(), feedMovieList);
 
         mRecyclerView.setAdapter(mAdapter);
     }

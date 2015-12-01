@@ -19,8 +19,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.phpnew_pranavkumar.farmerproject.adapter.MoviesecAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MyCustomLayoutManager;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewRlsAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
@@ -42,34 +46,63 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment contentFragment;
     HomeFragment homeFragment;
-    ProductDetailFragment pdtDetailFragment;
 
-    Button b;
+    Button b,bsec;
     RecyclerView mRecyclerView,mRecyclerViewsec,mRecyclerViewthr,mRecyclerViewfor,mRecyclerViewfv,mRecyclerViewsx,mRecyclerViewsvn,mRecyclerVieweght;
     RecyclerView.LayoutManager mLayoutManager,mLayoutManagersec,mLayoutManagerthr,mLayoutManagerfor,mLayoutManagerfv,mLayoutManagersx,mLayoutManagersvn,mLayoutManagereght;
     NewRlsAdapter mAdapter;
-    MyCustomLayoutManager myCustomLayoutManager;
-    JSONObject jsonobject;
-    JSONArray jsonarray;
-    String json;
+    MoviesecAdapter mAdaptersec;
+
     private ArrayList<MovieData> feedMovieList = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListsec = new ArrayList<MovieData>();
+    ProgressBar progressBar;
+    ScrollView scrollView;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        relativeLayout=(RelativeLayout)findViewById(R.id.mainlayout);
+
+        relativeLayout.getBackground().setAlpha(51);
+        progressBar=(ProgressBar)findViewById(R.id.progressbar);
+        scrollView=(ScrollView)findViewById(R.id.scrollView);
+        //progressBar.setVisibility(View.GONE);
+
         b=(Button)findViewById(R.id.button);
+        bsec=(Button)findViewById(R.id.buttonsec);
+
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplication(),NewReleaseActivity.class);
+
+                Intent i = new Intent(getApplicationContext(), NewReleaseActivity.class);
+                i.putParcelableArrayListExtra("cars", feedMovieList);
+
                 startActivity(i);
             }
         });
 
-        new DownloadJSON().execute();
+        bsec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent ipp = new Intent(getApplicationContext(), PopularActivity.class);
+                ipp.putParcelableArrayListExtra("cars", feedMovieListsec);
+
+                startActivity(ipp);
+
+            }
+        });
+        //new DownloadJSON().execute();
+
+        scrollView.setSmoothScrollingEnabled(true);
+
+        DownloadJSON asynctask=new DownloadJSON();
+        asynctask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview);
@@ -214,8 +247,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 //Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
 
-                Intent i=new Intent(this,ViewPagerActivity.class);
-                startActivity(i);
+//                Intent i=new Intent(this,ViewPagerActivity.class);
+//                startActivity(i);
                 return true;
 
             default:
@@ -231,6 +264,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -238,43 +273,49 @@ public class MainActivity extends AppCompatActivity {
 
 
             OkHttpClient okHttpClient = new OkHttpClient();
-            Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newmoviejson")
-                    .build();
+            Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newmoviejson").build();
+            Request requestsec = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
+
             Call call=okHttpClient.newCall(request);
+            Call callsec=okHttpClient.newCall(requestsec);
 
 
             try {
 
                 Response response=call.execute();
+                Response responsesec=callsec.execute();
 
-                if(response.isSuccessful())
-                {
-                    Log.v("okHTTP", response.body().toString());
-                }
+                String json = response.body().string();
+                String jsonsec = responsesec.body().string();
 
-
-
-                json = response.body().string();
 
 
                 JSONObject reader = new JSONObject(json);
-                jsonarray = reader.getJSONArray("movies");
+                JSONObject readersec = new JSONObject(jsonsec);
+
+                JSONArray jsonarray = reader.getJSONArray("movies");
+                JSONArray jsonarraysec = readersec.getJSONArray("movies");
+
 
                 for (int i = 0; i < jsonarray.length(); i++) {
 
-                    jsonobject = jsonarray.getJSONObject(i);
-
-                    MovieData item = new MovieData();
+                    JSONObject jsonobject = jsonarray.getJSONObject(i);
 
 
-                    item.setMoviename(jsonobject.optString("moviename"));
-                    item.setMoviethumbnail(jsonobject.optString("thumbnail"));
-                    item.setMovieurl(jsonobject.optString("url"));
-
-                    //Log.v("okHTTP",jsonobject.optString("moviename"));
-                    feedMovieList.add(item);
+                    feedMovieList.add(new MovieData(jsonobject.optString("thumbnail"),jsonobject.optString("url"),jsonobject.optString("moviename")));
 
                 }
+
+                for (int i = 0; i < jsonarraysec.length(); i++) {
+
+                    JSONObject jsonobjectsec = jsonarraysec.getJSONObject(i);
+
+
+                    feedMovieListsec.add(new MovieData(jsonobjectsec.optString("thumbnail"),jsonobjectsec.optString("url"),jsonobjectsec.optString("moviename")));
+
+                }
+
+
             } catch (JSONException e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -285,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Log.v("okHTTP",json);
-            return json;
+            return null;
         }
 
 
@@ -296,20 +337,22 @@ public class MainActivity extends AppCompatActivity {
 
 
             mAdapter = new NewRlsAdapter(getApplicationContext(), feedMovieList);
+            mAdaptersec = new MoviesecAdapter(getApplicationContext(), feedMovieListsec);
+
 
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerViewsec.setAdapter(mAdapter);
+            mRecyclerViewsec.setAdapter(mAdaptersec);
 
-            mRecyclerViewthr.setAdapter(mAdapter);
-            mRecyclerViewfor.setAdapter(mAdapter);
-            mRecyclerViewfv.setAdapter(mAdapter);
-            mRecyclerViewsx.setAdapter(mAdapter);
-            mRecyclerViewsvn.setAdapter(mAdapter);
-            mRecyclerVieweght.setAdapter(mAdapter);
+//            mRecyclerViewthr.setAdapter(mAdapter);
+//            mRecyclerViewfor.setAdapter(mAdapter);
+//            mRecyclerViewfv.setAdapter(mAdapter);
+//            mRecyclerViewsx.setAdapter(mAdapter);
+//            mRecyclerViewsvn.setAdapter(mAdapter);
+//            mRecyclerVieweght.setAdapter(mAdapter);
 
            // mAdapter.setOnItemClickListener(onItemClickListener);
 
-
+            progressBar.setVisibility(View.GONE);
 
         }
     }

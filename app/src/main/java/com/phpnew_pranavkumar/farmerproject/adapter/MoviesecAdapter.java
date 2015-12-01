@@ -58,13 +58,13 @@ import java.util.List;
 /**
  * Created by Pranav on 8/14/2015.
  */
-public class NewRlsAdapter extends RecyclerView.Adapter<NewRlsAdapter.ViewHolder>{
+public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHolder>{
 
     private List<MovieData> feedMovieList = new ArrayList<MovieData>();
     private Context mContext;
     OnItemClickListener mItemClickListener;
 
-    public NewRlsAdapter(Context applicationContext, ArrayList<MovieData> feedMovieList) {
+    public MoviesecAdapter(Context applicationContext, ArrayList<MovieData> feedMovieList) {
         this.feedMovieList = feedMovieList;
         this.mContext = applicationContext;
 

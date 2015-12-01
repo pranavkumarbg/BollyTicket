@@ -83,12 +83,12 @@ public class NewReleaseAdapter extends RecyclerView.Adapter<NewReleaseAdapter.Vi
         try
         {
 
-            String url = feedMovieList.get(position).getMoviethumbnail();
+            String url = feedMovieList.get(position).moviethumbnail;
 
-            String name=feedMovieList.get(position).getMoviename();
+            String name=feedMovieList.get(position).moviename;
 
             holder.placeName.setText(name);
-            holder.placeName.setTypeface(null, Typeface.BOLD);
+            holder.placeName.setTypeface(null, Typeface.NORMAL);
            // String url="http://www.indiancinemagallery.com/gallery/kajal-agarwal/Kajal-Agarwal-January-2014-pics-(7)2077.jpg";
 //            Log.d("inside", url);
 //            Glide.with(mContext).load(url)
@@ -126,7 +126,7 @@ public class NewReleaseAdapter extends RecyclerView.Adapter<NewReleaseAdapter.Vi
                     .into(new BitmapImageViewTarget(holder.placeImage) {
 
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                        public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation) {
                             super.onResourceReady(resource, glideAnimation);
 
 
@@ -136,6 +136,9 @@ public class NewReleaseAdapter extends RecyclerView.Adapter<NewReleaseAdapter.Vi
 
                                     int mutedLight = palette.getVibrantColor(mContext.getResources().getColor(android.R.color.black));
                                     holder.placeNameHolder.setBackgroundColor(mutedLight);
+
+                                    
+
                                 }
                             });
 

@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,10 +20,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviesecAdapter;
-import com.phpnew_pranavkumar.farmerproject.adapter.MyCustomLayoutManager;
+import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewRlsAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
 import com.phpnew_pranavkumar.farmerproject.fragment.HomeFragment;
@@ -137,9 +134,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManagereght = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
 
 
-       // myCustomLayoutManager = new MyCustomLayoutManager(getApplication());
-        //mRecyclerView.setLayoutManager(myCustomLayoutManager);
-        //mRecyclerView.smoothScrollToPosition(100);
+
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerViewsec.setLayoutManager(mLayoutManagersec);
@@ -350,10 +345,58 @@ public class MainActivity extends AppCompatActivity {
 //            mRecyclerViewsvn.setAdapter(mAdapter);
 //            mRecyclerVieweght.setAdapter(mAdapter);
 
-           // mAdapter.setOnItemClickListener(onItemClickListener);
+            mAdapter.setOnItemClickListener(onItemClickListener);
+            mAdaptersec.setOnItemClickListener(onItemClickListenersec);
+
 
             progressBar.setVisibility(View.GONE);
 
         }
     }
+
+
+    NewRlsAdapter.OnItemClickListener onItemClickListener=new NewRlsAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+
+            String url=feedMovieList.get(position).movieurl;
+            String image=feedMovieList.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
+
+    MoviesecAdapter.OnItemClickListener onItemClickListenersec=new MoviesecAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+
+            String url=feedMovieListsec.get(position).movieurl;
+            String image=feedMovieListsec.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
+
 }

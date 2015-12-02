@@ -12,6 +12,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
@@ -36,7 +38,7 @@ public class NewReleaseActivity extends AppCompatActivity {
     private StaggeredGridLayoutManager gaggeredGridLayoutManager;
 
     NewReleaseAdapter mAdapter;
-
+    ArrayList<MovieData> feedMovieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class NewReleaseActivity extends AppCompatActivity {
        // new DownloadJSON().execute();
 
         Intent i = this.getIntent();
-        ArrayList<MovieData> feedMovieList =  i.getParcelableArrayListExtra("cars");
+        feedMovieList =  i.getParcelableArrayListExtra("cars");
 
         mRecyclerView = (RecyclerView)findViewById(R.id.list);
         mRecyclerView.setHasFixedSize(true);
@@ -69,8 +71,31 @@ public class NewReleaseActivity extends AppCompatActivity {
         mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
 
+    NewReleaseAdapter.OnItemClickListener onItemClickListener=new NewReleaseAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+
+            String url=feedMovieList.get(position).movieurl;
+            String image=feedMovieList.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
 
 }

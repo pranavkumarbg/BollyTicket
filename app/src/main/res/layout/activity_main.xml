@@ -137,7 +137,7 @@
                         android:layout_weight="1"
                         android:text="English"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
 
@@ -148,7 +148,7 @@
                         android:layout_weight="1"
                         android:text="Hindi"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
 
@@ -159,7 +159,7 @@
                         android:layout_weight="1"
                         android:text="Kannada"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
                 </LinearLayout>
@@ -176,7 +176,7 @@
                         android:layout_weight="1"
                         android:text="Tamil"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
 
@@ -187,7 +187,7 @@
                         android:layout_weight="1"
                         android:text="Telugu"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
 
@@ -198,7 +198,7 @@
                         android:layout_weight="1"
                         android:text="Malayalm"
                         style="@style/MyApp.Button.Primary.Blue"
-                        >
+                        android:textColor="@color/white">
 
                     </Button>
                 </LinearLayout>

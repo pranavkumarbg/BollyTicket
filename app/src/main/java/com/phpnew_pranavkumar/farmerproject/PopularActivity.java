@@ -12,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.PopularAdapter;
@@ -35,7 +36,7 @@ public class PopularActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     PopularAdapter mAdapter;
-
+    ArrayList<MovieData> feedMovieList=new ArrayList<MovieData>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class PopularActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         Intent i = this.getIntent();
-        ArrayList<MovieData> feedMovieList =  i.getParcelableArrayListExtra("cars");
+        feedMovieList =  i.getParcelableArrayListExtra("cars");
 
         mRecyclerView = (RecyclerView)findViewById(R.id.listpp);
         mRecyclerView.setHasFixedSize(true);
@@ -60,8 +61,30 @@ public class PopularActivity extends AppCompatActivity {
         mAdapter = new PopularAdapter(getApplicationContext(), feedMovieList);
 
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
 
+    PopularAdapter.OnItemClickListener onItemClickListener=new PopularAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+
+            String url=feedMovieList.get(position).movieurl;
+            String image=feedMovieList.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
 
 }

@@ -10,8 +10,12 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
 
     }
+
+
     buildTypes {
         release {
             minifyEnabled false

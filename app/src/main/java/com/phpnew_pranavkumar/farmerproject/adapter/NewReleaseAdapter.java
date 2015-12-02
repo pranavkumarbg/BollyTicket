@@ -181,7 +181,7 @@ public class NewReleaseAdapter extends RecyclerView.Adapter<NewReleaseAdapter.Vi
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
             placeImage = (ImageView) itemView.findViewById(R.id.item_img);
-           // placeImage.setOnClickListener(this);
+            placeImage.setOnClickListener(this);
 
 
         }

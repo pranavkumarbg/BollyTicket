@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.MyApp.Button.Primary.Blue" parent="Widget.AppCompat.Button">
-        <item name="colorButtonNormal">#D8000000</item>
+        <item name="colorButtonNormal">#80000000</item>
 
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
+    <style name="Widget.AppCompat.Button.Colored">
+        <item name="android:buttonStyle">@style/BrandButtonStyle</item>
+
+    </style>
+
+
 </resources>

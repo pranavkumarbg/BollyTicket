@@ -386,7 +386,6 @@ public class MainActivity extends AppCompatActivity {
 
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-
             String url=feedMovieListsec.get(position).movieurl;
             String image=feedMovieListsec.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();

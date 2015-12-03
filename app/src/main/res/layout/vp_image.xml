@@ -12,4 +12,5 @@
         android:contentDescription="@string/txt_image_slider"
         android:scaleType="fitXY"/>
 
+
 </RelativeLayout>

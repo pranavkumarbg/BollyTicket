@@ -71,7 +71,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
         relativeLayout=(RelativeLayout) findViewById(R.id.mainfull);
         imageView=(ImageView)findViewById(R.id.imageViewfull);
         Intent i = getIntent();
@@ -136,7 +136,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             public void run() {
                 updateWindowBackground();
             }
-        }, TimeUnit.SECONDS.toMillis(2));
+        }, TimeUnit.SECONDS.toMillis(1));
     }
 
 

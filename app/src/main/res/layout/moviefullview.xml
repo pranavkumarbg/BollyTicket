@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainfull">
+    android:id="@+id/mainfull"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarfull"
@@ -12,26 +13,67 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_scrollFlags="scroll|enterAlways" >
-
     </android.support.v7.widget.Toolbar>
+
+
     <ImageView
         android:layout_below="@+id/toolbarfull"
-        android:layout_width="250dp"
+        android:layout_width="fill_parent"
         android:layout_height="350dp"
         android:id="@+id/imageViewfull"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"/>
 
 
+    <View
+        android:layout_below="@+id/imageViewfull"
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:background="?android:attr/dividerVertical"
+        android:layout_marginTop="10dp"/>
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="5dp">
+
+    <LinearLayout
+        android:id="@+id/placeNameHolderkk"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#80000000"
+        android:transitionName="tNameHolder"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textviewmy"
+
+            />
+
+
+    </LinearLayout>
+
+    </FrameLayout>
 
         <LinearLayout
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/LinearLayout02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageViewfull"
+            android:layout_below="@+id/frame"
             >
+
 
             <Button
                 android:id="@+id/Button04"
@@ -39,11 +81,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="WATCH NOW"
-                android:textColor="@color/white"
-                style="@style/MyApp.Button.Primary.Blue"
-                >
+                android:theme="@style/Button.Tinted"
+                android:layout_marginLeft="20dp">
 
             </Button>
+
 
             <Button
                 android:id="@+id/Button05"
@@ -51,16 +93,25 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="DOWNLOAD"
-                android:textColor="@color/white"
-                style="@style/MyApp.Button.Primary.Blue"
-                >
+                android:theme="@style/Button.Tinted"
+                android:layout_marginRight="20dp">
 
             </Button>
 
 
         </LinearLayout>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:id="@+id/fabnewl"
+        android:src="@drawable/ic_movie"
+        app:layout_anchor="@+id/frame"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_alignBottom="@+id/frame"
+        android:layout_alignRight="@+id/view"
+        android:layout_alignEnd="@+id/view" />
 
 
 </RelativeLayout>

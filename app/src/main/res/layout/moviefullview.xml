@@ -19,7 +19,7 @@
     <ImageView
         android:layout_below="@+id/toolbarfull"
         android:layout_width="fill_parent"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         android:id="@+id/imageViewfull"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -65,13 +65,31 @@
     </LinearLayout>
 
     </FrameLayout>
+    <View
+        android:layout_below="@+id/frame"
+        android:id="@+id/viewnew"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginRight="4dip"
+        android:background="?android:attr/dividerVertical"
+        android:layout_marginTop="5dp"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewnew"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/frame">
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/LinearLayout02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/frame"
+
             >
 
 
@@ -101,17 +119,49 @@
 
         </LinearLayout>
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_below="@+id/LinearLayout02">
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    />
+
+
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="send"
+                    android:id="@+id/buttondown"
+                    android:theme="@style/Button.Tinted"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:id="@+id/fabnewl"
         android:src="@drawable/ic_movie"
-        app:layout_anchor="@+id/frame"
-        app:layout_anchorGravity="bottom|right|end"
-        android:layout_alignBottom="@+id/frame"
-        android:layout_alignRight="@+id/view"
-        android:layout_alignEnd="@+id/view" />
+
+        android:layout_below="@+id/imageViewfull"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
 
 </RelativeLayout>

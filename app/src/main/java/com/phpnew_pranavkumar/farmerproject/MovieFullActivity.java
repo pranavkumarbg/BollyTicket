@@ -72,7 +72,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
         //ab.setDisplayHomeAsUpEnabled(true);
-        relativeLayout=(RelativeLayout) findViewById(R.id.mainfull);
+        //relativeLayout=(RelativeLayout) findViewById(R.id.mainfull);
         imageView=(ImageView)findViewById(R.id.imageViewfull);
         Intent i = getIntent();
 

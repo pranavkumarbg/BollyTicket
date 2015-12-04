@@ -1,7 +1,11 @@
 package com.phpnew_pranavkumar.farmerproject;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,6 +14,7 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,14 +28,18 @@ import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.phpnew_pranavkumar.farmerproject.services.MovieDownloadService;
 import com.phpnew_pranavkumar.farmerproject.utils.BlurBuilder;
 import com.phpnew_pranavkumar.farmerproject.utils.BlurTransformation;
 import com.squareup.picasso.Picasso;
@@ -50,11 +59,14 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     private static final int BACKGROUND_IMAGES_HEIGHT = 360;
     private static final float BLUR_RADIUS = 25F;
     private final Handler handler = new Handler();
-
+    AlertDialog levelDialog;
+    final CharSequence[] items = {" Internal Player "," External Player "};
     private BlurTransformation blurTransformation;
     private int backgroundIndex;
     private Point backgroundImageTargetSize;
     String image;
+    String flag;
+    Button watch,downlaod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,12 +84,18 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
         //ab.setDisplayHomeAsUpEnabled(true);
-        //relativeLayout=(RelativeLayout) findViewById(R.id.mainfull);
+        ScrollView scrollView=(ScrollView) findViewById(R.id.scrollView);
+
+        scrollView.setSmoothScrollingEnabled(true);
         imageView=(ImageView)findViewById(R.id.imageViewfull);
         Intent i = getIntent();
 
-        String flag= i.getStringExtra("flagurl");
+        flag= i.getStringExtra("flagurl");
         image=i.getStringExtra("flagimage");
+
+        watch=(Button)findViewById(R.id.Button04);
+        downlaod=(Button)findViewById(R.id.Button05);
+
 
         Glide.with(this)
                 .load(image)
@@ -89,17 +107,80 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
                     @Override
                     public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation) {
                         super.onResourceReady(resource, glideAnimation);
-
-//                        Drawable dr = new BitmapDrawable(resource);
-//
-//                        relativeLayout.setBackground(dr);
-//                        relativeLayout.getBackground().setAlpha(70);
-
-
-
                     }
                 });
 
+
+        watch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivity.this);
+                builder.setTitle("Select The Player");
+                builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+
+
+                        switch (item) {
+                            case 0:
+                                // Your code when first option seletced
+                                // Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_LONG).show();
+                                Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag, PlayerActivity.TYPE_OTHER);
+
+                                Intent mpdIntent = new Intent(MovieFullActivity.this, PlayerActivity.class)
+
+                                        .setData(Uri.parse(sample.uri))
+                                        .putExtra(PlayerActivity.CONTENT_ID_EXTRA, sample.contentId)
+                                        .putExtra(PlayerActivity.CONTENT_TYPE_EXTRA, sample.type);
+                                startActivity(mpdIntent);
+                                break;
+                            case 1:
+                                // Your code when 2nd  option seletced
+                                //Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
+
+                                Uri intentUri = Uri.parse(flag);
+
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setDataAndType(intentUri, "video/mp4");
+                                startActivity(intent);
+
+
+                                break;
+
+
+                        }
+                        levelDialog.dismiss();
+                    }
+                });
+                levelDialog = builder.create();
+                levelDialog.show();
+            }
+        });
+
+        downlaod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
+                intent.putExtra("movie",flag);
+                startService(intent);
+                Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_LONG).show();
+
+//                Intent i = new Intent();
+//                i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
+//                PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 1, i, 0);
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        handler.removeCallbacksAndMessages(null);
 
 
     }

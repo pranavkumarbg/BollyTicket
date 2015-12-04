@@ -21,7 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.phpnew_pranavkumar.farmerproject.adapter.MovieforAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviesecAdapter;
+import com.phpnew_pranavkumar.farmerproject.adapter.MovietrdAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewRlsAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
@@ -44,14 +46,20 @@ public class MainActivity extends AppCompatActivity {
     private Fragment contentFragment;
     HomeFragment homeFragment;
 
-    Button b,bsec;
+    Button b,bsec,btrd,bfor;
     RecyclerView mRecyclerView,mRecyclerViewsec,mRecyclerViewthr,mRecyclerViewfor,mRecyclerViewfv,mRecyclerViewsx,mRecyclerViewsvn,mRecyclerVieweght;
     RecyclerView.LayoutManager mLayoutManager,mLayoutManagersec,mLayoutManagerthr,mLayoutManagerfor,mLayoutManagerfv,mLayoutManagersx,mLayoutManagersvn,mLayoutManagereght;
     NewRlsAdapter mAdapter;
     MoviesecAdapter mAdaptersec;
+    MovietrdAdapter mAdaptertrd;
+    MovieforAdapter mAdapterfor;
 
     private ArrayList<MovieData> feedMovieList = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListsec = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListtrd = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListfor = new ArrayList<MovieData>();
+
+
     ProgressBar progressBar;
     ScrollView scrollView;
     RelativeLayout relativeLayout;
@@ -63,14 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
         relativeLayout=(RelativeLayout)findViewById(R.id.mainlayout);
 
-        relativeLayout.getBackground().setAlpha(51);
+        //relativeLayout.getBackground().setAlpha(51);
         progressBar=(ProgressBar)findViewById(R.id.progressbar);
         scrollView=(ScrollView)findViewById(R.id.scrollView);
         //progressBar.setVisibility(View.GONE);
 
         b=(Button)findViewById(R.id.button);
         bsec=(Button)findViewById(R.id.buttonsec);
-
+        btrd=(Button)findViewById(R.id.buttontrd);
+        bfor=(Button)findViewById(R.id.buttonfor);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +103,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btrd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent ie = new Intent(getApplicationContext(), EnglishActivity.class);
+                ie.putParcelableArrayListExtra("cars", feedMovieListtrd);
+
+                startActivity(ie);
+            }
+        });
+
+        bfor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent ih = new Intent(getApplicationContext(), HindiActivity.class);
+                ih.putParcelableArrayListExtra("cars", feedMovieListfor);
+
+                startActivity(ih);
+            }
+        });
+
         //new DownloadJSON().execute();
 
         scrollView.setSmoothScrollingEnabled(true);
@@ -270,26 +302,42 @@ public class MainActivity extends AppCompatActivity {
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newmoviejson").build();
             Request requestsec = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
+            Request requesttrd = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
+            Request requestfor = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
+
 
             Call call=okHttpClient.newCall(request);
             Call callsec=okHttpClient.newCall(requestsec);
+            Call calltrd=okHttpClient.newCall(requesttrd);
+            Call callfor=okHttpClient.newCall(requestfor);
 
 
             try {
 
                 Response response=call.execute();
                 Response responsesec=callsec.execute();
+                Response responsetrd=calltrd.execute();
+                Response responsefor=callfor.execute();
+
 
                 String json = response.body().string();
                 String jsonsec = responsesec.body().string();
+                String jsontrd = responsetrd.body().string();
+                String jsonfor = responsefor.body().string();
 
 
 
                 JSONObject reader = new JSONObject(json);
                 JSONObject readersec = new JSONObject(jsonsec);
+                JSONObject readertrd = new JSONObject(jsontrd);
+                JSONObject readerfor = new JSONObject(jsonfor);
+
 
                 JSONArray jsonarray = reader.getJSONArray("movies");
                 JSONArray jsonarraysec = readersec.getJSONArray("movies");
+                JSONArray jsonarraytrd = readertrd.getJSONArray("movies");
+                JSONArray jsonarrayfor = readerfor.getJSONArray("movies");
+
 
 
                 for (int i = 0; i < jsonarray.length(); i++) {
@@ -310,6 +358,23 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+                for (int i = 0; i < jsonarraytrd.length(); i++) {
+
+                    JSONObject jsonobjecttrd = jsonarraytrd.getJSONObject(i);
+
+
+                    feedMovieListtrd.add(new MovieData(jsonobjecttrd.optString("thumbnail"),jsonobjecttrd.optString("url"),jsonobjecttrd.optString("moviename")));
+
+                }
+
+                for (int i = 0; i < jsonarrayfor.length(); i++) {
+
+                    JSONObject jsonobjectfor = jsonarrayfor.getJSONObject(i);
+
+
+                    feedMovieListfor.add(new MovieData(jsonobjectfor.optString("thumbnail"),jsonobjectfor.optString("url"),jsonobjectfor.optString("moviename")));
+
+                }
 
             } catch (JSONException e) {
                 Log.e("Error", e.getMessage());
@@ -333,13 +398,15 @@ public class MainActivity extends AppCompatActivity {
 
             mAdapter = new NewRlsAdapter(getApplicationContext(), feedMovieList);
             mAdaptersec = new MoviesecAdapter(getApplicationContext(), feedMovieListsec);
+            mAdaptertrd = new MovietrdAdapter(getApplicationContext(), feedMovieListtrd);
+            mAdapterfor = new MovieforAdapter(getApplicationContext(), feedMovieListfor);
 
 
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerViewsec.setAdapter(mAdaptersec);
 
-//            mRecyclerViewthr.setAdapter(mAdapter);
-//            mRecyclerViewfor.setAdapter(mAdapter);
+            mRecyclerViewthr.setAdapter(mAdaptertrd);
+            mRecyclerViewfor.setAdapter(mAdapterfor);
 //            mRecyclerViewfv.setAdapter(mAdapter);
 //            mRecyclerViewsx.setAdapter(mAdapter);
 //            mRecyclerViewsvn.setAdapter(mAdapter);
@@ -347,7 +414,8 @@ public class MainActivity extends AppCompatActivity {
 
             mAdapter.setOnItemClickListener(onItemClickListener);
             mAdaptersec.setOnItemClickListener(onItemClickListenersec);
-
+            mAdaptertrd.setOnItemClickListener(onItemClickListenertrd);
+            mAdapterfor.setOnItemClickListener(onItemClickListenerfor);
 
             progressBar.setVisibility(View.GONE);
 
@@ -388,6 +456,48 @@ public class MainActivity extends AppCompatActivity {
 
             String url=feedMovieListsec.get(position).movieurl;
             String image=feedMovieListsec.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
+
+    MovietrdAdapter.OnItemClickListener onItemClickListenertrd=new MovietrdAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+            String url=feedMovieListtrd.get(position).movieurl;
+            String image=feedMovieListtrd.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage",image);
+            startActivity(transitionIntent);
+
+
+
+        }
+    };
+
+    MovieforAdapter.OnItemClickListener onItemClickListenerfor=new MovieforAdapter.OnItemClickListener()
+    {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+            String url=feedMovieListfor.get(position).movieurl;
+            String image=feedMovieListfor.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage",image);

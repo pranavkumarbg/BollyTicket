@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainfull"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarfull"
@@ -12,156 +11,151 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_scrollFlags="scroll|enterAlways" >
-    </android.support.v7.widget.Toolbar>
+        app:layout_scrollFlags="scroll|enterAlways"></android.support.v7.widget.Toolbar>
 
-
-    <ImageView
-        android:layout_below="@+id/toolbarfull"
-        android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:id="@+id/imageViewfull"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"/>
-
-
-    <View
-        android:layout_below="@+id/imageViewfull"
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:background="?android:attr/dividerVertical"
-        android:layout_marginTop="10dp"/>
-
-
-    <FrameLayout
-        android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_marginTop="5dp">
-
-    <LinearLayout
-        android:id="@+id/placeNameHolderkk"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#80000000"
-        android:transitionName="tNameHolder"
-        >
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textviewmy"
-
-            />
-
-
-    </LinearLayout>
-
-    </FrameLayout>
-    <View
-        android:layout_below="@+id/frame"
-        android:id="@+id/viewnew"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:background="?android:attr/dividerVertical"
-        android:layout_marginTop="5dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/viewnew"
-        >
+        android:layout_below="@+id/toolbarfull"
+        android:id="@+id/scrollView">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/frame">
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:id="@+id/LinearLayout02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent">
 
-            >
+            <ImageView
+                android:id="@+id/imageViewfull"
+                android:layout_width="fill_parent"
+                android:layout_height="350dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="10dp" />
 
 
-            <Button
-                android:id="@+id/Button04"
-                android:layout_width="0dp"
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/imageViewfull"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/dividerVertical" />
+
+
+            <FrameLayout
+                android:id="@+id/frame"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="WATCH NOW"
-                android:theme="@style/Button.Tinted"
-                android:layout_marginLeft="20dp">
+                android:layout_below="@+id/view"
+                android:layout_marginTop="5dp">
 
-            </Button>
+                <LinearLayout
+                    android:id="@+id/placeNameHolderkk"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="#80000000"
+                    android:transitionName="tNameHolder">
+
+                    <TextView
+
+                        android:id="@+id/textviewmy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
 
 
-            <Button
-                android:id="@+id/Button05"
-                android:layout_width="0dp"
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <View
+                android:id="@+id/viewnew"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/frame"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="5dp"
+                android:background="?android:attr/dividerVertical" />
+
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="DOWNLOAD"
-                android:theme="@style/Button.Tinted"
-                android:layout_marginRight="20dp">
-
-            </Button>
+                android:layout_below="@+id/viewnew"
+                android:layout_marginTop="10dp">
 
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/Button04"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:text="WATCH NOW"
+                    android:theme="@style/Button.Tinted">
 
+                </Button>
+
+
+                <Button
+                    android:id="@+id/Button05"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text="DOWNLOAD"
+                    android:theme="@style/Button.Tinted">
+
+                </Button>
+
+
+            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/LinearLayout02"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_below="@+id/LinearLayout02">
+                android:padding="16dp">
 
                 <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:numStars="5"
-                    />
-
+                    android:numStars="5" />
 
 
                 <Button
+                    android:id="@+id/buttondown"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:padding="12dp"
                     android:text="send"
-                    android:id="@+id/buttondown"
-                    android:theme="@style/Button.Tinted"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
+                    android:theme="@style/Button.Tinted" />
 
             </LinearLayout>
 
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabnewl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/imageViewfull"
+                android:clickable="true"
+                android:src="@drawable/ic_movie" />
+
         </RelativeLayout>
     </ScrollView>
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:id="@+id/fabnewl"
-        android:src="@drawable/ic_movie"
-
-        android:layout_below="@+id/imageViewfull"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
-
 
 </RelativeLayout>

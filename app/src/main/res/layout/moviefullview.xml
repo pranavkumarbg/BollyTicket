@@ -18,39 +18,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbarfull"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:id="@+id/ll">
             <ImageView
                 android:id="@+id/imageViewfull"
                 android:layout_width="fill_parent"
-                android:layout_height="350dp"
+                android:layout_height="325dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
                 android:layout_marginTop="10dp" />
+            </LinearLayout>
 
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:layout_below="@+id/imageViewfull"
-                android:layout_marginLeft="4dip"
-                android:layout_marginRight="4dip"
-                android:layout_marginTop="10dp"
-                android:background="?android:attr/dividerVertical" />
+            <!--<View-->
+                <!--android:id="@+id/view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:layout_below="@+id/ll"-->
+                <!--android:layout_marginLeft="4dip"-->
+                <!--android:layout_marginRight="4dip"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="?android:attr/dividerVertical" />-->
 
 
             <FrameLayout
                 android:id="@+id/frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view"
-                android:layout_marginTop="5dp">
+                android:layout_below="@+id/ll"
+                android:layout_marginTop="25dp">
 
                 <LinearLayout
                     android:id="@+id/placeNameHolderkk"
@@ -149,13 +156,22 @@
                 android:id="@+id/fabnewl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_movie"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/imageViewfull"
-                android:clickable="true"
-                android:src="@drawable/ic_movie" />
+                android:layout_below="@+id/ll"/>
 
         </RelativeLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progressbarfull"
+        android:theme="@style/CircularProgress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 </RelativeLayout>

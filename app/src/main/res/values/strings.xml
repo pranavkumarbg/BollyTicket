@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieProject</string>
+    <string name="app_name">Bolly Ticket</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -34,4 +34,16 @@
     <string name="drm_error_unsupported_scheme">This device does not support the required DRM scheme</string>
 
     <string name="drm_error_unknown">An unknown DRM error occurred</string>
+
+    <string-array name="choices">
+        <item>Part 1</item>
+        <item>Part 2</item>
+
+    </string-array>
+
+    <string-array name="choicesnew">
+        <item>Internal Player</item>
+        <item>External player</item>
+
+    </string-array>
 </resources>

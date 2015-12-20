@@ -1,15 +1,10 @@
 package com.phpnew_pranavkumar.farmerproject;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.app.PendingIntent;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,28 +14,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.phpnew_pranavkumar.farmerproject.services.MovieDownloadService;
-import com.phpnew_pranavkumar.farmerproject.utils.BlurBuilder;
 import com.phpnew_pranavkumar.farmerproject.utils.BlurTransformation;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -67,18 +56,25 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     String image;
     String flag;
     Button watch,downlaod;
-
+    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.moviefullview);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressbarfull);
         blurTransformation = new BlurTransformation(this, BLUR_RADIUS);
-        backgroundImageTargetSize = calculateBackgroundImageSizeCroppedToScreenAspectRatio(
-                getWindowManager().getDefaultDisplay());
-        updateWindowBackground();
+        backgroundImageTargetSize = calculateBackgroundImageSizeCroppedToScreenAspectRatio(getWindowManager().getDefaultDisplay());
 
+//        progressDialog = new ProgressDialog(MovieFullActivity.this,
+//                R.style.AppTheme_Dark_Dialog);
+//        progressDialog.setIndeterminate(true);
+//        progressDialog.setMessage("Loading..........");
+//        progressDialog.setTitle("Movie");
+
+        updateWindowBackground();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarfull);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
@@ -102,11 +98,19 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
                 .asBitmap()
                 .placeholder(R.drawable.video_placeholder)
                 .thumbnail(0.5f)
-                .into(new BitmapImageViewTarget(imageView) {
+                .into(new BitmapImageViewTarget(imageView)
+                {
 
                     @Override
-                    public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation) {
+                    public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation)
+                    {
                         super.onResourceReady(resource, glideAnimation);
+
+                        //progressDialog.dismiss();
+
+                        //progressBar.setVisibility(View.GONE);
+
+
                     }
                 });
 
@@ -115,7 +119,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivity.this,R.style.MyDialogTheme);
                 builder.setTitle("Select The Player");
                 builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -142,7 +146,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
                                 Intent intent = new Intent();
                                 intent.setAction(Intent.ACTION_VIEW);
-                                intent.setDataAndType(intentUri, "video/mp4");
+                                intent.setDataAndType(intentUri, "video/*");
                                 startActivity(intent);
 
 
@@ -200,6 +204,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         changeBackground(new BitmapDrawable(getResources(), bitmap));
+        progressBar.setVisibility(View.GONE);
+       // progressDialog.dismiss();
     }
 
     @Override
@@ -208,6 +214,11 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     }
 
     private void updateWindowBackground() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
+
+        //progressDialog.show();
 
         Picasso.with(this).load(image)
                 .resize(backgroundImageTargetSize.x, backgroundImageTargetSize.y).centerCrop()

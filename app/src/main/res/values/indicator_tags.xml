@@ -8,7 +8,7 @@
 
     <integer name="default_circle_indicator_orientation">0</integer>
 
-    <dimen name="default_circle_indicator_radius">4dp</dimen>
+    <dimen name="default_circle_indicator_radius">2dp</dimen>
 
     <bool name="default_circle_indicator_snap">false</bool>
 

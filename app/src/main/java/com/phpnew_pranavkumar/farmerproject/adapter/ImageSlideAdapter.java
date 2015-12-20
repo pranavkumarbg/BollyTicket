@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.phpnew_pranavkumar.farmerproject.MovieFullActivity;
 import com.phpnew_pranavkumar.farmerproject.R;
 import com.phpnew_pranavkumar.farmerproject.bean.Product;
 import com.phpnew_pranavkumar.farmerproject.fragment.HomeFragment;
@@ -72,21 +74,33 @@ public class ImageSlideAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Bundle arguments = new Bundle();
-                Fragment fragment = null;
+                //Fragment fragment = null;
                 Log.d("position adapter", "" + position);
                 Product product = (Product) products.get(position);
                 arguments.putParcelable("singleProduct", product);
 
                 // Start a new fragment
-                fragment = new ProductDetailFragment();
-                fragment.setArguments(arguments);
+//                fragment = new ProductDetailFragment();
+//                fragment.setArguments(arguments);
+//
+//                FragmentTransaction transaction = activity
+//                        .getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.content_frame, fragment,
+//                        ProductDetailFragment.ARG_ITEM_ID);
+//                transaction.addToBackStack(ProductDetailFragment.ARG_ITEM_ID);
+//                transaction.commit();
 
-                FragmentTransaction transaction = activity
-                        .getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, fragment,
-                        ProductDetailFragment.ARG_ITEM_ID);
-                transaction.addToBackStack(ProductDetailFragment.ARG_ITEM_ID);
-                transaction.commit();
+               // Intent transitionIntent = new Intent(activity, MovieFullActivity.class);
+
+
+                //String url=feedMovieList.get(position).movieurl;
+                //String image=feedMovieList.get(position).moviethumbnail;
+                //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+                //transitionIntent.putExtra("flagurl", url);
+                //transitionIntent.putExtra("flagimage",image);
+                //startActivity(transitionIntent);
+
+
             }
         });
         imageLoader.displayImage(

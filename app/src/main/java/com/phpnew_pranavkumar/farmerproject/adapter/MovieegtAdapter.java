@@ -49,6 +49,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.phpnew_pranavkumar.farmerproject.R;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
+import com.phpnew_pranavkumar.farmerproject.bean.NewMovieData;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -58,13 +59,13 @@ import java.util.List;
 /**
  * Created by Pranav on 8/14/2015.
  */
-public class MovieforAdapter extends RecyclerView.Adapter<MovieforAdapter.ViewHolder>{
+public class MovieegtAdapter extends RecyclerView.Adapter<MovieegtAdapter.ViewHolder>{
 
-    private List<MovieData> feedMovieList = new ArrayList<MovieData>();
+    private List<NewMovieData> feedMovieList = new ArrayList<NewMovieData>();
     private Context mContext;
     OnItemClickListener mItemClickListener;
 
-    public MovieforAdapter(Context applicationContext, ArrayList<MovieData> feedMovieList) {
+    public MovieegtAdapter(Context applicationContext, ArrayList<NewMovieData> feedMovieList) {
         this.feedMovieList = feedMovieList;
         this.mContext = applicationContext;
 
@@ -88,8 +89,8 @@ public class MovieforAdapter extends RecyclerView.Adapter<MovieforAdapter.ViewHo
             String name=feedMovieList.get(position).moviename;
 
             holder.placeName.setText(name);
-           // holder.placeName.setTextSize(10);
-           // holder.placeName.setTypeface(null, Typeface.BOLD);
+            //holder.placeName.setTextSize(10);
+            //holder.placeName.setTypeface(null, Typeface.BOLD);
 
 //            String fontPath = "fonts/Face Your Fears.ttf";
 //
@@ -138,7 +139,7 @@ public class MovieforAdapter extends RecyclerView.Adapter<MovieforAdapter.ViewHo
 
 
                             int mutedLight = palette.getVibrantColor(mContext.getResources().getColor(android.R.color.black));
-                            int newcolr=mContext.getResources().getColor(R.color.monsoon);
+                            //int newcolr=mContext.getResources().getColor(R.color.monsoon);
                             holder.placeNameHolder.setBackgroundColor(mutedLight);
 
                         }

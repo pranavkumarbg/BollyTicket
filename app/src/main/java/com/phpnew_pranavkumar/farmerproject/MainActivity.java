@@ -21,12 +21,17 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.phpnew_pranavkumar.farmerproject.adapter.MovieegtAdapter;
+import com.phpnew_pranavkumar.farmerproject.adapter.MoviefivAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieforAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviesecAdapter;
+import com.phpnew_pranavkumar.farmerproject.adapter.MoviesixAdapter;
+import com.phpnew_pranavkumar.farmerproject.adapter.MoviesvnAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovietrdAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewRlsAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
+import com.phpnew_pranavkumar.farmerproject.bean.NewMovieData;
 import com.phpnew_pranavkumar.farmerproject.fragment.HomeFragment;
 import com.phpnew_pranavkumar.farmerproject.fragment.ProductDetailFragment;
 import com.squareup.okhttp.Call;
@@ -46,18 +51,26 @@ public class MainActivity extends AppCompatActivity {
     private Fragment contentFragment;
     HomeFragment homeFragment;
 
-    Button b,bsec,btrd,bfor;
-    RecyclerView mRecyclerView,mRecyclerViewsec,mRecyclerViewthr,mRecyclerViewfor,mRecyclerViewfv,mRecyclerViewsx,mRecyclerViewsvn,mRecyclerVieweght;
-    RecyclerView.LayoutManager mLayoutManager,mLayoutManagersec,mLayoutManagerthr,mLayoutManagerfor,mLayoutManagerfv,mLayoutManagersx,mLayoutManagersvn,mLayoutManagereght;
+    Button b, bsec, btrd, bfor, bfiv, bsix, bsvn, begt,eng,hnd,kan,tam,tlgu,mal;
+    RecyclerView mRecyclerView, mRecyclerViewsec, mRecyclerViewthr, mRecyclerViewfor, mRecyclerViewfv, mRecyclerViewsx, mRecyclerViewsvn, mRecyclerVieweght;
+    RecyclerView.LayoutManager mLayoutManager, mLayoutManagersec, mLayoutManagerthr, mLayoutManagerfor, mLayoutManagerfv, mLayoutManagersx, mLayoutManagersvn, mLayoutManagereght;
     NewRlsAdapter mAdapter;
     MoviesecAdapter mAdaptersec;
     MovietrdAdapter mAdaptertrd;
     MovieforAdapter mAdapterfor;
+    MoviefivAdapter moviefivAdapter;
+    MoviesixAdapter moviesixAdapter;
+    MoviesvnAdapter moviesvnAdapter;
+    MovieegtAdapter movieegtAdapter;
 
     private ArrayList<MovieData> feedMovieList = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListsec = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListtrd = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListfor = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListfiv = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListsix = new ArrayList<MovieData>();
+    private ArrayList<MovieData> feedMovieListsvn = new ArrayList<MovieData>();
+    private ArrayList<NewMovieData> feedMovieListegt = new ArrayList<NewMovieData>();
 
 
     ProgressBar progressBar;
@@ -69,17 +82,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        relativeLayout=(RelativeLayout)findViewById(R.id.mainlayout);
+        relativeLayout = (RelativeLayout) findViewById(R.id.mainlayout);
 
         //relativeLayout.getBackground().setAlpha(51);
-        progressBar=(ProgressBar)findViewById(R.id.progressbar);
-        scrollView=(ScrollView)findViewById(R.id.scrollView);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
         //progressBar.setVisibility(View.GONE);
 
-        b=(Button)findViewById(R.id.button);
-        bsec=(Button)findViewById(R.id.buttonsec);
-        btrd=(Button)findViewById(R.id.buttontrd);
-        bfor=(Button)findViewById(R.id.buttonfor);
+        b = (Button) findViewById(R.id.button);
+        bsec = (Button) findViewById(R.id.buttonsec);
+        btrd = (Button) findViewById(R.id.buttontrd);
+        bfor = (Button) findViewById(R.id.buttonfor);
+        bfiv = (Button) findViewById(R.id.buttonfv);
+        bsix = (Button) findViewById(R.id.buttonsx);
+        bsvn = (Button) findViewById(R.id.buttonsvn);
+        begt = (Button) findViewById(R.id.buttonegt);
+
+
+        eng = (Button) findViewById(R.id.Buttoneng);
+        hnd = (Button) findViewById(R.id.Buttonhnd);
+        kan = (Button) findViewById(R.id.Buttonkan);
+        tam = (Button) findViewById(R.id.Buttontam);
+        tlgu = (Button) findViewById(R.id.Buttontlgu);
+        mal = (Button) findViewById(R.id.Buttonmal);
+
+
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,26 +153,129 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bfiv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent ik = new Intent(getApplicationContext(), KannadaActivity.class);
+                ik.putParcelableArrayListExtra("cars", feedMovieListfiv);
+
+                startActivity(ik);
+            }
+        });
+
+        bsix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itlgu = new Intent(getApplicationContext(), TeluguActivity.class);
+                itlgu.putParcelableArrayListExtra("cars", feedMovieListsix);
+
+                startActivity(itlgu);
+            }
+        });
+
+        bsvn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itml = new Intent(getApplicationContext(), TamilActivity.class);
+                itml.putParcelableArrayListExtra("cars", feedMovieListsvn);
+
+                startActivity(itml);
+            }
+        });
+
+        begt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), MalayalamActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListegt);
+
+                startActivity(imal);
+            }
+        });
+
+
+        eng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent imal = new Intent(getApplicationContext(), EnglishActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListtrd);
+
+                startActivity(imal);
+            }
+        });
+
+        hnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), HindiActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListfor);
+
+                startActivity(imal);
+            }
+        });
+
+        kan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), KannadaActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListfiv);
+
+                startActivity(imal);
+            }
+        });
+
+        tam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), TamilActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListsvn);
+
+                startActivity(imal);
+            }
+        });
+
+        tlgu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), TeluguActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListsix);
+
+                startActivity(imal);
+            }
+        });
+
+        mal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent imal = new Intent(getApplicationContext(), MalayalamActivity.class);
+                imal.putParcelableArrayListExtra("cars", feedMovieListegt);
+
+                startActivity(imal);
+            }
+        });
+
         //new DownloadJSON().execute();
 
         scrollView.setSmoothScrollingEnabled(true);
 
-        DownloadJSON asynctask=new DownloadJSON();
+        DownloadJSON asynctask = new DownloadJSON();
         asynctask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerViewsec = (RecyclerView)findViewById(R.id.recyclerviewsec);
+        mRecyclerViewsec = (RecyclerView) findViewById(R.id.recyclerviewsec);
         mRecyclerViewsec.setHasFixedSize(true);
 
-        mRecyclerViewthr = (RecyclerView)findViewById(R.id.recyclerviewtrd);
-        mRecyclerViewfor = (RecyclerView)findViewById(R.id.recyclerviewfor);
-        mRecyclerViewfv = (RecyclerView)findViewById(R.id.recyclerviewfv);
-        mRecyclerViewsx = (RecyclerView)findViewById(R.id.recyclerviewsx);
-        mRecyclerViewsvn = (RecyclerView)findViewById(R.id.recyclerviewsvn);
-        mRecyclerVieweght = (RecyclerView)findViewById(R.id.recyclerviewegt);
+        mRecyclerViewthr = (RecyclerView) findViewById(R.id.recyclerviewtrd);
+        mRecyclerViewfor = (RecyclerView) findViewById(R.id.recyclerviewfor);
+        mRecyclerViewfv = (RecyclerView) findViewById(R.id.recyclerviewfv);
+        mRecyclerViewsx = (RecyclerView) findViewById(R.id.recyclerviewsx);
+        mRecyclerViewsvn = (RecyclerView) findViewById(R.id.recyclerviewsvn);
+        mRecyclerVieweght = (RecyclerView) findViewById(R.id.recyclerviewegt);
 
         mRecyclerViewthr.setHasFixedSize(true);
         mRecyclerViewfor.setHasFixedSize(true);
@@ -155,17 +285,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerVieweght.setHasFixedSize(true);
 
 
-        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagersec = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagersec = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        mLayoutManagerthr = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagerfor = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagerfv = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagersx = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagersvn = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mLayoutManagereght = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-
-
+        mLayoutManagerthr = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagerfor = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagerfv = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagersx = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagersvn = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagereght = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
 
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -187,7 +315,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerViewsx.smoothScrollToPosition(1000);
         mRecyclerViewsvn.smoothScrollToPosition(1000);
         mRecyclerVieweght.smoothScrollToPosition(1000);
-
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -263,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -291,8 +418,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBar.setVisibility(View.VISIBLE);
-
+           // if(feedMovieList.size()==0) {
+                progressBar.setVisibility(View.VISIBLE);
+            //}
+            //feedMovieList.add(getApplication());
         }
 
         @Override
@@ -302,42 +431,64 @@ public class MainActivity extends AppCompatActivity {
             OkHttpClient okHttpClient = new OkHttpClient();
             Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newmoviejson").build();
             Request requestsec = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
-            Request requesttrd = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
-            Request requestfor = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
+            Request requesttrd = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/english").build();
+            Request requestfor = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/hindi").build();
+            Request requestfiv = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/kannada").build();
+            Request requestsix = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/telugu").build();
+            Request requestsvn = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/tamil").build();
+            Request requestegt = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/malayalamnew").build();
 
 
-            Call call=okHttpClient.newCall(request);
-            Call callsec=okHttpClient.newCall(requestsec);
-            Call calltrd=okHttpClient.newCall(requesttrd);
-            Call callfor=okHttpClient.newCall(requestfor);
+            Call call = okHttpClient.newCall(request);
+            Call callsec = okHttpClient.newCall(requestsec);
+            Call calltrd = okHttpClient.newCall(requesttrd);
+            Call callfor = okHttpClient.newCall(requestfor);
+            Call callfiv = okHttpClient.newCall(requestfiv);
+            Call callsix = okHttpClient.newCall(requestsix);
+            Call callsvn = okHttpClient.newCall(requestsvn);
+            Call callegt = okHttpClient.newCall(requestegt);
 
 
             try {
 
-                Response response=call.execute();
-                Response responsesec=callsec.execute();
-                Response responsetrd=calltrd.execute();
-                Response responsefor=callfor.execute();
+                Response response = call.execute();
+                Response responsesec = callsec.execute();
+                Response responsetrd = calltrd.execute();
+                Response responsefor = callfor.execute();
+                Response responsefiv = callfiv.execute();
+                Response responsesix = callsix.execute();
+                Response responsesvn = callsvn.execute();
+                Response responseegt = callegt.execute();
 
 
                 String json = response.body().string();
                 String jsonsec = responsesec.body().string();
                 String jsontrd = responsetrd.body().string();
                 String jsonfor = responsefor.body().string();
-
+                String jsonfiv = responsefiv.body().string();
+                String jsonsix = responsesix.body().string();
+                String jsonsvn = responsesvn.body().string();
+                String jsonegt = responseegt.body().string();
 
 
                 JSONObject reader = new JSONObject(json);
                 JSONObject readersec = new JSONObject(jsonsec);
                 JSONObject readertrd = new JSONObject(jsontrd);
                 JSONObject readerfor = new JSONObject(jsonfor);
+                JSONObject readerfiv = new JSONObject(jsonfiv);
+                JSONObject readersix = new JSONObject(jsonsix);
+                JSONObject readersvn = new JSONObject(jsonsvn);
+                JSONObject readeregt = new JSONObject(jsonegt);
 
 
                 JSONArray jsonarray = reader.getJSONArray("movies");
                 JSONArray jsonarraysec = readersec.getJSONArray("movies");
                 JSONArray jsonarraytrd = readertrd.getJSONArray("movies");
                 JSONArray jsonarrayfor = readerfor.getJSONArray("movies");
-
+                JSONArray jsonarrayfiv = readerfiv.getJSONArray("movies");
+                JSONArray jsonarraysix = readersix.getJSONArray("movies");
+                JSONArray jsonarraysvn = readersvn.getJSONArray("movies");
+                JSONArray jsonarrayegt = readeregt.getJSONArray("movies");
 
 
                 for (int i = 0; i < jsonarray.length(); i++) {
@@ -345,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
 
-                    feedMovieList.add(new MovieData(jsonobject.optString("thumbnail"),jsonobject.optString("url"),jsonobject.optString("moviename")));
+                    feedMovieList.add(new MovieData(jsonobject.optString("thumbnail"), jsonobject.optString("url"), jsonobject.optString("moviename")));
 
                 }
 
@@ -354,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjectsec = jsonarraysec.getJSONObject(i);
 
 
-                    feedMovieListsec.add(new MovieData(jsonobjectsec.optString("thumbnail"),jsonobjectsec.optString("url"),jsonobjectsec.optString("moviename")));
+                    feedMovieListsec.add(new MovieData(jsonobjectsec.optString("thumbnail"), jsonobjectsec.optString("url"), jsonobjectsec.optString("moviename")));
 
                 }
 
@@ -363,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjecttrd = jsonarraytrd.getJSONObject(i);
 
 
-                    feedMovieListtrd.add(new MovieData(jsonobjecttrd.optString("thumbnail"),jsonobjecttrd.optString("url"),jsonobjecttrd.optString("moviename")));
+                    feedMovieListtrd.add(new MovieData(jsonobjecttrd.optString("thumbnail"), jsonobjecttrd.optString("url"), jsonobjecttrd.optString("moviename")));
 
                 }
 
@@ -372,16 +523,54 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjectfor = jsonarrayfor.getJSONObject(i);
 
 
-                    feedMovieListfor.add(new MovieData(jsonobjectfor.optString("thumbnail"),jsonobjectfor.optString("url"),jsonobjectfor.optString("moviename")));
+                    feedMovieListfor.add(new MovieData(jsonobjectfor.optString("thumbnail"), jsonobjectfor.optString("url"), jsonobjectfor.optString("moviename")));
 
                 }
+
+                for (int i = 0; i < jsonarrayfiv.length(); i++) {
+
+                    JSONObject jsonobjectfiv = jsonarrayfiv.getJSONObject(i);
+
+
+                    feedMovieListfiv.add(new MovieData(jsonobjectfiv.optString("thumbnail"), jsonobjectfiv.optString("url"), jsonobjectfiv.optString("moviename")));
+
+                }
+
+                for (int i = 0; i < jsonarraysix.length(); i++) {
+
+                    JSONObject jsonobjectsix = jsonarraysix.getJSONObject(i);
+
+
+                    feedMovieListsix.add(new MovieData(jsonobjectsix.optString("thumbnail"), jsonobjectsix.optString("url"), jsonobjectsix.optString("moviename")));
+
+                }
+
+
+                for (int i = 0; i < jsonarraysvn.length(); i++) {
+
+                    JSONObject jsonobjectsvn = jsonarraysvn.getJSONObject(i);
+
+
+                    feedMovieListsvn.add(new MovieData(jsonobjectsvn.optString("thumbnail"), jsonobjectsvn.optString("url"), jsonobjectsvn.optString("moviename")));
+
+                }
+
+
+                for (int i = 0; i < jsonarrayegt.length(); i++) {
+
+                    JSONObject jsonobjectegt = jsonarrayegt.getJSONObject(i);
+
+
+                    //feedMovieListegt.add(new MovieData(jsonobjectegt.optString("thumbnail"), jsonobjectegt.optString("url"), jsonobjectegt.optString("moviename")));
+
+                    feedMovieListegt.add(new NewMovieData(jsonobjectegt.optString("thumbnail"), jsonobjectegt.optString("url1"),jsonobjectegt.optString("url2"), jsonobjectegt.optString("moviename")));
+                }
+
 
             } catch (JSONException e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
-            }
-            catch (Exception io)
-            {
+            } catch (Exception io) {
                 io.printStackTrace();
             }
 
@@ -390,16 +579,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         @Override
         protected void onPostExecute(String args) {
-
 
 
             mAdapter = new NewRlsAdapter(getApplicationContext(), feedMovieList);
             mAdaptersec = new MoviesecAdapter(getApplicationContext(), feedMovieListsec);
             mAdaptertrd = new MovietrdAdapter(getApplicationContext(), feedMovieListtrd);
             mAdapterfor = new MovieforAdapter(getApplicationContext(), feedMovieListfor);
+            moviefivAdapter = new MoviefivAdapter(getApplicationContext(), feedMovieListfiv);
+            moviesixAdapter = new MoviesixAdapter(getApplicationContext(), feedMovieListsix);
+            moviesvnAdapter = new MoviesvnAdapter(getApplicationContext(), feedMovieListsvn);
+            movieegtAdapter = new MovieegtAdapter(getApplicationContext(), feedMovieListegt);
 
 
             mRecyclerView.setAdapter(mAdapter);
@@ -407,24 +598,30 @@ public class MainActivity extends AppCompatActivity {
 
             mRecyclerViewthr.setAdapter(mAdaptertrd);
             mRecyclerViewfor.setAdapter(mAdapterfor);
-//            mRecyclerViewfv.setAdapter(mAdapter);
-//            mRecyclerViewsx.setAdapter(mAdapter);
-//            mRecyclerViewsvn.setAdapter(mAdapter);
-//            mRecyclerVieweght.setAdapter(mAdapter);
+            mRecyclerViewfv.setAdapter(moviefivAdapter);
+            mRecyclerViewsx.setAdapter(moviesixAdapter);
+            mRecyclerViewsvn.setAdapter(moviesvnAdapter);
+            mRecyclerVieweght.setAdapter(movieegtAdapter);
 
             mAdapter.setOnItemClickListener(onItemClickListener);
             mAdaptersec.setOnItemClickListener(onItemClickListenersec);
             mAdaptertrd.setOnItemClickListener(onItemClickListenertrd);
             mAdapterfor.setOnItemClickListener(onItemClickListenerfor);
 
-            progressBar.setVisibility(View.GONE);
+            moviefivAdapter.setOnItemClickListener(onItemClickListenerfiv);
+            moviesixAdapter.setOnItemClickListener(onItemClickListenersix);
+            moviesvnAdapter.setOnItemClickListener(onItemClickListenersvn);
+            movieegtAdapter.setOnItemClickListener(onItemClickListeneregt);
+
+            //if(feedMovieList.size()>0) {
+                progressBar.setVisibility(View.GONE);
+            //}
 
         }
     }
 
 
-    NewRlsAdapter.OnItemClickListener onItemClickListener=new NewRlsAdapter.OnItemClickListener()
-    {
+    NewRlsAdapter.OnItemClickListener onItemClickListener = new NewRlsAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -433,20 +630,18 @@ public class MainActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
 
-            String url=feedMovieList.get(position).movieurl;
-            String image=feedMovieList.get(position).moviethumbnail;
+            String url = feedMovieList.get(position).movieurl;
+            String image = feedMovieList.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
-
 
 
         }
     };
 
-    MoviesecAdapter.OnItemClickListener onItemClickListenersec=new MoviesecAdapter.OnItemClickListener()
-    {
+    MoviesecAdapter.OnItemClickListener onItemClickListenersec = new MoviesecAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -454,20 +649,18 @@ public class MainActivity extends AppCompatActivity {
 
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            String url=feedMovieListsec.get(position).movieurl;
-            String image=feedMovieListsec.get(position).moviethumbnail;
+            String url = feedMovieListsec.get(position).movieurl;
+            String image = feedMovieListsec.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
-
 
 
         }
     };
 
-    MovietrdAdapter.OnItemClickListener onItemClickListenertrd=new MovietrdAdapter.OnItemClickListener()
-    {
+    MovietrdAdapter.OnItemClickListener onItemClickListenertrd = new MovietrdAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -475,20 +668,18 @@ public class MainActivity extends AppCompatActivity {
 
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            String url=feedMovieListtrd.get(position).movieurl;
-            String image=feedMovieListtrd.get(position).moviethumbnail;
+            String url = feedMovieListtrd.get(position).movieurl;
+            String image = feedMovieListtrd.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
-
 
 
         }
     };
 
-    MovieforAdapter.OnItemClickListener onItemClickListenerfor=new MovieforAdapter.OnItemClickListener()
-    {
+    MovieforAdapter.OnItemClickListener onItemClickListenerfor = new MovieforAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -496,16 +687,96 @@ public class MainActivity extends AppCompatActivity {
 
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            String url=feedMovieListfor.get(position).movieurl;
-            String image=feedMovieListfor.get(position).moviethumbnail;
+            String url = feedMovieListfor.get(position).movieurl;
+            String image = feedMovieListfor.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
-
 
 
         }
     };
 
+
+    MoviefivAdapter.OnItemClickListener onItemClickListenerfiv = new MoviefivAdapter.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+            String url = feedMovieListfiv.get(position).movieurl;
+            String image = feedMovieListfiv.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage", image);
+            startActivity(transitionIntent);
+
+
+        }
+    };
+
+
+    MoviesixAdapter.OnItemClickListener onItemClickListenersix = new MoviesixAdapter.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+            String url = feedMovieListsix.get(position).movieurl;
+            String image = feedMovieListsix.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage", image);
+            startActivity(transitionIntent);
+
+
+        }
+    };
+
+
+    MoviesvnAdapter.OnItemClickListener onItemClickListenersvn = new MoviesvnAdapter.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+
+            String url = feedMovieListsvn.get(position).movieurl;
+            String image = feedMovieListsvn.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagimage", image);
+            startActivity(transitionIntent);
+
+
+        }
+    };
+
+
+    MovieegtAdapter.OnItemClickListener onItemClickListeneregt = new MovieegtAdapter.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
+
+            String url1 = feedMovieListegt.get(position).movieurl1;
+            String url2= feedMovieListegt.get(position).movieurl2;
+            String image = feedMovieListegt.get(position).moviethumbnail;
+            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            transitionIntent.putExtra("flagurl1", url1);
+            transitionIntent.putExtra("flagurl2", url2);
+            transitionIntent.putExtra("flagimage", image);
+            startActivity(transitionIntent);
+
+
+        }
+    };
 }

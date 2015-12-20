@@ -41,7 +41,9 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="13sp"/>
 
     </LinearLayout>
 

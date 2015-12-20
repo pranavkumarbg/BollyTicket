@@ -88,8 +88,8 @@ public class MovietrdAdapter extends RecyclerView.Adapter<MovietrdAdapter.ViewHo
             String name=feedMovieList.get(position).moviename;
 
             holder.placeName.setText(name);
-            holder.placeName.setTextSize(10);
-            holder.placeName.setTypeface(null, Typeface.BOLD);
+            //holder.placeName.setTextSize(10);
+            //holder.placeName.setTypeface(null, Typeface.BOLD);
 
 //            String fontPath = "fonts/Face Your Fears.ttf";
 //

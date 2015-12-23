@@ -21,6 +21,7 @@ import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.startapp.android.publish.StartAppAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,7 @@ public class NewReleaseActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     private StaggeredGridLayoutManager gaggeredGridLayoutManager;
-
+    private StartAppAd startAppAd = new StartAppAd(this);
     NewReleaseAdapter mAdapter;
     ArrayList<MovieData> feedMovieList;
 
@@ -76,6 +77,24 @@ public class NewReleaseActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startAppAd.onBackPressed();
+        super.onBackPressed();
+    }
+
     NewReleaseAdapter.OnItemClickListener onItemClickListener=new NewReleaseAdapter.OnItemClickListener()
     {
 
@@ -92,6 +111,7 @@ public class NewReleaseActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage",image);
             startActivity(transitionIntent);
+
 
 
 

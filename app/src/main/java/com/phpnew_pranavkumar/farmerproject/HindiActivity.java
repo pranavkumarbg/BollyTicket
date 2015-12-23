@@ -24,6 +24,7 @@ import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.startapp.android.publish.StartAppAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,8 @@ public class HindiActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     PopularAdapter mAdapter;
+    private StartAppAd startAppAd = new StartAppAd(this);
+
     ArrayList<MovieData> feedMovieList=new ArrayList<MovieData>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,23 @@ public class HindiActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startAppAd.onBackPressed();
+        super.onBackPressed();
+    }
 
     PopularAdapter.OnItemClickListener onItemClickListener=new PopularAdapter.OnItemClickListener()
     {

@@ -66,6 +66,7 @@ import com.phpnew_pranavkumar.farmerproject.player.HlsRendererBuilder;
 import com.phpnew_pranavkumar.farmerproject.player.SmoothStreamingRendererBuilder;
 import com.phpnew_pranavkumar.farmerproject.player.SmoothStreamingTestMediaDrmCallback;
 import com.phpnew_pranavkumar.farmerproject.player.WidevineTestMediaDrmCallback;
+import com.startapp.android.publish.StartAppAd;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -112,6 +113,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   private Button audioButton;
   private Button textButton;
   private Button retryButton;
+  private StartAppAd startAppAd = new StartAppAd(this);
 
   private DemoPlayer player;
   private DebugTextViewHelper debugViewHelper;
@@ -144,6 +146,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
 //    contentId = "Apple master playlist";
 
     setContentView(R.layout.player_activity);
+
+
     View root = findViewById(R.id.root);
     root.setOnTouchListener(new OnTouchListener() {
       @Override
@@ -197,6 +201,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   @Override
   public void onResume() {
     super.onResume();
+    startAppAd.onResume();
+
     configureSubtitleView();
     if (player == null) {
       preparePlayer(true);
@@ -206,8 +212,16 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   }
 
   @Override
+  public void onBackPressed() {
+    startAppAd.onBackPressed();
+    super.onBackPressed();
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
+    startAppAd.onPause();
+
     if (!enableBackgroundAudio) {
       releasePlayer();
     } else {
@@ -289,6 +303,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
       playerNeedsPrepare = false;
       updateButtonVisibilities();
     }
+
     player.setSurface(surfaceView.getHolder().getSurface());
     player.setPlayWhenReady(playWhenReady);
   }
@@ -312,6 +327,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
     if (playbackState == ExoPlayer.STATE_ENDED) {
       showControls();
     }
+
     String text = "playWhenReady=" + playWhenReady + ", playbackState=";
     switch(playbackState) {
       case ExoPlayer.STATE_BUFFERING:
@@ -524,6 +540,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   private void showControls() {
     mediaController.show(0);
     debugRootView.setVisibility(View.VISIBLE);
+
+
   }
 
   // DemoPlayer.CaptionListener implementation
@@ -563,6 +581,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   public void surfaceCreated(SurfaceHolder holder) {
     if (player != null) {
       player.setSurface(holder.getSurface());
+
     }
   }
 

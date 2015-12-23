@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.onesignal.OneSignal;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieegtAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviefivAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieforAdapter;
@@ -38,6 +39,9 @@ import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.startapp.android.publish.StartAppAd;
+import com.startapp.android.publish.StartAppSDK;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MovieData> feedMovieListsec = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListtrd = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListfor = new ArrayList<MovieData>();
-    private ArrayList<MovieData> feedMovieListfiv = new ArrayList<MovieData>();
+    private ArrayList<NewMovieData> feedMovieListfiv = new ArrayList<NewMovieData>();
     private ArrayList<MovieData> feedMovieListsix = new ArrayList<MovieData>();
     private ArrayList<MovieData> feedMovieListsvn = new ArrayList<MovieData>();
     private ArrayList<NewMovieData> feedMovieListegt = new ArrayList<NewMovieData>();
 
+    private StartAppAd startAppAd = new StartAppAd(this);
 
     ProgressBar progressBar;
     ScrollView scrollView;
@@ -81,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        OneSignal.enableNotificationsWhenActive(true);
+
+        StartAppSDK.init(this, "211895003", true);
 
         relativeLayout = (RelativeLayout) findViewById(R.id.mainlayout);
 
@@ -116,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 i.putParcelableArrayListExtra("cars", feedMovieList);
 
                 startActivity(i);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -127,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 ipp.putParcelableArrayListExtra("cars", feedMovieListsec);
 
                 startActivity(ipp);
+                startAppAd.showAd();
+                startAppAd.loadAd();
 
             }
         });
@@ -139,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 ie.putParcelableArrayListExtra("cars", feedMovieListtrd);
 
                 startActivity(ie);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -150,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                 ih.putParcelableArrayListExtra("cars", feedMovieListfor);
 
                 startActivity(ih);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -161,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 ik.putParcelableArrayListExtra("cars", feedMovieListfiv);
 
                 startActivity(ik);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -171,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 itlgu.putParcelableArrayListExtra("cars", feedMovieListsix);
 
                 startActivity(itlgu);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -181,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 itml.putParcelableArrayListExtra("cars", feedMovieListsvn);
 
                 startActivity(itml);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -191,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListegt);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -203,6 +229,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListtrd);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -213,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListfor);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -223,6 +253,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListfiv);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -233,6 +265,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListsvn);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -243,6 +277,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListsix);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -253,6 +289,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListegt);
 
                 startActivity(imal);
+                startAppAd.showAd();
+                startAppAd.loadAd();
             }
         });
 
@@ -348,6 +386,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
+
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (contentFragment instanceof HomeFragment) {
@@ -378,13 +431,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            super.onBackPressed();
-        } else if (contentFragment instanceof HomeFragment
-                || fm.getBackStackEntryCount() == 0) {
-            finish();
-        }
+        startAppAd.onBackPressed();
+        super.onBackPressed();
+//        FragmentManager fm = getSupportFragmentManager();
+//        if (fm.getBackStackEntryCount() > 0) {
+//            super.onBackPressed();
+//        } else if (contentFragment instanceof HomeFragment
+//                || fm.getBackStackEntryCount() == 0) {
+//            finish();
+//        }
     }
 
     @Override
@@ -433,7 +488,7 @@ public class MainActivity extends AppCompatActivity {
             Request requestsec = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
             Request requesttrd = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/english").build();
             Request requestfor = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/hindi").build();
-            Request requestfiv = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/kannada").build();
+            Request requestfiv = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/kannadanew").build();
             Request requestsix = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/telugu").build();
             Request requestsvn = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/tamil").build();
             Request requestegt = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/malayalamnew").build();
@@ -532,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjectfiv = jsonarrayfiv.getJSONObject(i);
 
 
-                    feedMovieListfiv.add(new MovieData(jsonobjectfiv.optString("thumbnail"), jsonobjectfiv.optString("url"), jsonobjectfiv.optString("moviename")));
+                    feedMovieListfiv.add(new NewMovieData(jsonobjectfiv.optString("thumbnail"), jsonobjectfiv.optString("url1"),jsonobjectfiv.optString("url2"), jsonobjectfiv.optString("moviename")));
 
                 }
 
@@ -705,12 +760,14 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(View view, int position) {
 
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
-            String url = feedMovieListfiv.get(position).movieurl;
+            String url1 = feedMovieListfiv.get(position).movieurl1;
+            String url2= feedMovieListfiv.get(position).movieurl2;
             String image = feedMovieListfiv.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
-            transitionIntent.putExtra("flagurl", url);
+            transitionIntent.putExtra("flagurl1", url1);
+            transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
 

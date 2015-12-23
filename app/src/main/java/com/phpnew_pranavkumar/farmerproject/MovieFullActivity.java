@@ -33,6 +33,7 @@ import com.phpnew_pranavkumar.farmerproject.services.MovieDownloadService;
 import com.phpnew_pranavkumar.farmerproject.utils.BlurTransformation;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.startapp.android.publish.StartAppAd;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,6 +45,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
     RelativeLayout relativeLayout;
     ImageView imageView,imageViewlol;
+    private StartAppAd startAppAd = new StartAppAd(this);
+
     private static final int BACKGROUND_IMAGES_WIDTH = 360;
     private static final int BACKGROUND_IMAGES_HEIGHT = 360;
     private static final float BLUR_RADIUS = 25F;
@@ -109,7 +112,6 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
                         //progressDialog.dismiss();
 
                         //progressBar.setVisibility(View.GONE);
-
 
                     }
                 });
@@ -183,12 +185,26 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     @Override
     protected void onPause() {
         super.onPause();
+        startAppAd.onPause();
 
         handler.removeCallbacksAndMessages(null);
 
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        startAppAd.onBackPressed();
+        super.onBackPressed();
+    }
 
     @Override
     protected void onDestroy() {
@@ -206,6 +222,9 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         changeBackground(new BitmapDrawable(getResources(), bitmap));
         progressBar.setVisibility(View.GONE);
        // progressDialog.dismiss();
+        startAppAd.showAd(); // show the ad
+        startAppAd.loadAd(); // load the next ad
+
     }
 
     @Override

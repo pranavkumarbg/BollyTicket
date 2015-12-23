@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -17,6 +18,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.onesignal.OneSignal;
+
+import org.json.JSONObject;
 
 public class AppData extends Application {
     public static final boolean DEVELOPER_MODE = false;
@@ -25,6 +29,10 @@ public class AppData extends Application {
     @SuppressWarnings("unused")
     public void onCreate() {
         super.onCreate();
+        OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
+                .setAutoPromptLocation(true)
+                .init();;
         if (DEVELOPER_MODE
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -61,5 +69,22 @@ public class AppData extends Application {
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
 
         ImageLoader.getInstance().init(config);
+    }
+
+
+    private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        @Override
+        public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
+            try {
+                if (additionalData != null) {
+//                    if (additionalData.has("actionSelected"))
+//                        Log.d("OneSignalExample", "OneSignal notification button with id " + additionalData.getString("actionSelected") + " pressed");
+
+                    Log.d("OneSignalExample", "additionalData---:\n" + additionalData.toString());
+                }
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
     }
 }

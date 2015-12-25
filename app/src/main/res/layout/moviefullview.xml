@@ -19,7 +19,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbarfull"
         android:id="@+id/scrollView"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:layout_above="@+id/startAppBanner">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -133,14 +134,16 @@
                 android:padding="16dp">
 
                 <RatingBar
+                    android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:numStars="5" />
+                    android:numStars="5"
+                    />
 
 
                 <Button
-                    android:id="@+id/buttondown"
+                    android:id="@+id/buttonsend"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

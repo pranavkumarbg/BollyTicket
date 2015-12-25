@@ -201,7 +201,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
   @Override
   public void onResume() {
     super.onResume();
-    startAppAd.onResume();
+    //startAppAd.onResume();
 
     configureSubtitleView();
     if (player == null) {
@@ -213,14 +213,14 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
 
   @Override
   public void onBackPressed() {
-    startAppAd.onBackPressed();
+    //startAppAd.onBackPressed();
     super.onBackPressed();
   }
 
   @Override
   public void onPause() {
     super.onPause();
-    startAppAd.onPause();
+    ///startAppAd.onPause();
 
     if (!enableBackgroundAudio) {
       releasePlayer();

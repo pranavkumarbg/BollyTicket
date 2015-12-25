@@ -18,10 +18,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -58,9 +61,11 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     private Point backgroundImageTargetSize;
     String image;
     String flag;
-    Button watch,downlaod;
+    Button watch,downlaod,send;
+    RatingBar ratingBar;
     ProgressBar progressBar;
     ProgressDialog progressDialog;
+    String sendbar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,7 +87,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
         ScrollView scrollView=(ScrollView) findViewById(R.id.scrollView);
 
         scrollView.setSmoothScrollingEnabled(true);
@@ -94,7 +99,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
         watch=(Button)findViewById(R.id.Button04);
         downlaod=(Button)findViewById(R.id.Button05);
-
+        ratingBar=(RatingBar)findViewById(R.id.rating);
+        send=(Button)findViewById(R.id.buttonsend);
 
         Glide.with(this)
                 .load(image)
@@ -121,7 +127,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivity.this,R.style.MyDialogTheme);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivity.this, R.style.MyDialogTheme);
                 builder.setTitle("Select The Player");
                 builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -131,7 +137,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
                             case 0:
                                 // Your code when first option seletced
                                 // Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_LONG).show();
-                                Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag, PlayerActivity.TYPE_OTHER);
+                                Samples.Sample sample = new Samples.Sample("Android screens (Matroska)", flag, PlayerActivity.TYPE_OTHER);
 
                                 Intent mpdIntent = new Intent(MovieFullActivity.this, PlayerActivity.class)
 
@@ -148,7 +154,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
                                 Intent intent = new Intent();
                                 intent.setAction(Intent.ACTION_VIEW);
-                                intent.setDataAndType(intentUri, "video/*");
+                                intent.setDataAndType(intentUri, "video/mp4");
                                 startActivity(intent);
 
 
@@ -169,7 +175,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                intent.putExtra("movie",flag);
+                intent.putExtra("movie", flag);
                 startService(intent);
                 Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_LONG).show();
 
@@ -180,6 +186,50 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             }
         });
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                sendbar=String.valueOf(v);
+            }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","bobbyrana1983@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, sendbar);
+
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch(id) {
+
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -204,6 +254,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     public void onBackPressed() {
         startAppAd.onBackPressed();
         super.onBackPressed();
+        overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+
     }
 
     @Override

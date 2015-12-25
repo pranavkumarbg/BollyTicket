@@ -10,6 +10,7 @@
     <string name="time_out">Time Out</string>
     <string name="error_occured">Error Occurred</string>
 
+    <string name="debugg">true</string>
 
     <string name="enable_background_audio">Play in background</string>
 
@@ -34,6 +35,7 @@
     <string name="drm_error_unsupported_scheme">This device does not support the required DRM scheme</string>
 
     <string name="drm_error_unknown">An unknown DRM error occurred</string>
+    <string name="search_hint">search here</string>
 
     <string-array name="choices">
         <item>Part 1</item>

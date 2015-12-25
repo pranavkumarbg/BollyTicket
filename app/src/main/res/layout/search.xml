@@ -7,7 +7,7 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarpp"
+        android:id="@+id/toolbarsrch"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -17,8 +17,8 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/toolbarpp"
-        android:id="@+id/listpp"
+        android:layout_below="@+id/toolbarsrch"
+        android:id="@+id/listsrch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/startAppBanner" />

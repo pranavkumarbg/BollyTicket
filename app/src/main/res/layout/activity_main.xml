@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +8,12 @@
     android:background="@drawable/mmm"
     >
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@+id/startAppBanner">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,6 +26,10 @@
 
 
         </android.support.v7.widget.Toolbar>
+
+        <!--<android.support.design.widget.CoordinatorLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -576,10 +585,25 @@
 
             </android.support.v7.widget.CardView>
 
+
+
         </LinearLayout>
 
     </ScrollView>
 
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/fab"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="bottom|end"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@drawable/ic_search"/>-->
+            <!--</android.support.design.widget.CoordinatorLayout>-->
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -590,6 +614,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone"/>
+
+
 
     <com.startapp.android.publish.banner.Banner
         android:id="@+id/startAppBanner"

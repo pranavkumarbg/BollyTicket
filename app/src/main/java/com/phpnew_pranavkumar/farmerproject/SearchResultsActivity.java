@@ -36,57 +36,78 @@ import java.util.ArrayList;
 /**
  * Created by kehooo on 11/28/2015.
  */
-public class NewReleaseActivity extends AppCompatActivity {
+public class SearchResultsActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     private StaggeredGridLayoutManager gaggeredGridLayoutManager;
     private StartAppAd startAppAd = new StartAppAd(this);
     NewReleaseAdapter mAdapter;
-    ArrayList<MovieData> feedMovieList;
-    Bundle appData;
+    private ArrayList<MovieData> feedMovieList;
+    private ArrayList<MovieData> feedMovieListnext = new ArrayList<MovieData>();
+    String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newrealese);
+        setContentView(R.layout.search);
+        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarrls);
+        handleIntent(getIntent());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarsrch);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         //ab.setHomeAsUpIndicator(R.drawable.ic_home);
-        ab.setTitle("New Release");
+        ab.setTitle("Search");
         ab.setDisplayHomeAsUpEnabled(true);
-
-        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
         // new DownloadJSON().execute();
 
-        Intent i = this.getIntent();
-        feedMovieList =  i.getParcelableArrayListExtra("cars");
+        Bundle appData = getIntent().getBundleExtra(SearchManager.APP_DATA);
+        feedMovieList =  appData.getParcelableArrayList("cars");
 
-        appData = new Bundle();
-        appData.putParcelableArrayList("cars", feedMovieList);
-
-
-        mRecyclerView = (RecyclerView)findViewById(R.id.list);
+        mRecyclerView = (RecyclerView)findViewById(R.id.listsrch);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 
         //gaggeredGridLayoutManager= new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
+        //Toast.makeText(this,"search activity",Toast.LENGTH_LONG).show();
 
 
         // StaggeredGridLayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2,1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
+       // mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
 
-        mRecyclerView.setAdapter(mAdapter);
+        //mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(onItemClickListener);
+        //mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            query = intent.getStringExtra(SearchManager.QUERY);
+
+            feedMovieListnext.clear();
+           // feedMovieList.clear();
+
+            new DownloadJSON().execute();
+           // Toast.makeText(this,query,Toast.LENGTH_LONG).show();
+
+
+        }
+    }
 
     @Override
     public void onResume() {
@@ -104,8 +125,9 @@ public class NewReleaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         startAppAd.onBackPressed();
         super.onBackPressed();
-    }
+        overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,10 +138,9 @@ public class NewReleaseActivity extends AppCompatActivity {
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
                 (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setAppSearchData(appData);
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
-        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         return true;
@@ -141,6 +162,74 @@ public class NewReleaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class DownloadJSON extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        public String doInBackground(String... params) {
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String args) {
+
+
+            for (int j = 0; j < feedMovieList.size(); j++) {
+                MovieData sk = feedMovieList.get(j);
+                String moviename = sk.moviename.toLowerCase();
+
+               // String moviename =feedMovieList.get(j).moviename;
+
+                //Toast.makeText(getApplicationContext(),moviename,Toast.LENGTH_LONG).show();
+                int index1 = moviename.indexOf(query);
+                // if(moviename.contains(query))
+                if (index1 != -1 || moviename.contains(query))
+                {
+
+                    //Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
+
+//                    MovieData item1 = new MovieData();
+//                    // ArrayList<MovieData> feedMovieListnew = new ArrayList<MovieData>();
+//
+//                    item1.setMoviename(feedMovieList.get(j).getMoviename());
+//                    item1.setMoviethumbnail(feedMovieList.get(j).getMoviethumbnail());
+//                    item1.setMovieurl(feedMovieList.get(j).getMovieurl());
+
+
+                    feedMovieListnext.add(new MovieData(feedMovieList.get(j).moviethumbnail, feedMovieList.get(j).movieurl, feedMovieList.get(j).moviename));
+
+
+                    // feedMovieListnext.add(item1);
+
+
+                    mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieListnext);
+
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    if(feedMovieListnext.isEmpty())
+                    {
+                        Toast.makeText(getApplication(),"No Movie found",Toast.LENGTH_LONG).show();
+                    }
+
+
+                    mAdapter.setOnItemClickListener(onItemClickListener);
+
+
+                }
+            }
+        }
+    }
+
+
+
     NewReleaseAdapter.OnItemClickListener onItemClickListener=new NewReleaseAdapter.OnItemClickListener()
     {
 
@@ -151,14 +240,13 @@ public class NewReleaseActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
 
-            String url=feedMovieList.get(position).movieurl;
-            String image=feedMovieList.get(position).moviethumbnail;
+            String url=feedMovieListnext.get(position).movieurl;
+            String image=feedMovieListnext.get(position).moviethumbnail;
             //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage",image);
             startActivity(transitionIntent);
 
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
 

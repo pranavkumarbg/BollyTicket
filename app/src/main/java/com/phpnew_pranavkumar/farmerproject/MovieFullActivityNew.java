@@ -18,10 +18,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -58,9 +61,12 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
     private Point backgroundImageTargetSize;
     String image;
     String flag1,flag2;
-    Button watch,downlaod;
+    Button watch,downlaod,send;
     ProgressBar progressBar;
     ProgressDialog progressDialog;
+    String sendbar;
+    RatingBar ratingBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,7 +88,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
         ScrollView scrollView=(ScrollView) findViewById(R.id.scrollView);
 
         scrollView.setSmoothScrollingEnabled(true);
@@ -92,14 +98,15 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         flag1= i.getStringExtra("flagurl1");
         flag2= i.getStringExtra("flagurl2");
 
-        Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_SHORT).show();
 
         image=i.getStringExtra("flagimage");
 
         watch=(Button)findViewById(R.id.Button04);
         downlaod=(Button)findViewById(R.id.Button05);
-
+        ratingBar=(RatingBar)findViewById(R.id.rating);
+        send=(Button)findViewById(R.id.buttonsend);
 
         Glide.with(this)
                 .load(image)
@@ -159,7 +166,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                 if(selectedPosition==0)
                                 {
-                                    Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_LONG).show();
 
                                     //playmovie(flag1);
 
@@ -187,7 +194,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                                     if(selectedPosition==0)
                                                     {
-                                                        Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
+                                                        //Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
 
                                                         Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag1, PlayerActivity.TYPE_OTHER);
 
@@ -201,7 +208,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                     }
                                                     else
                                                     {
-                                                        Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
+                                                        //Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
 
                                                         Uri intentUri = Uri.parse(flag1);
 
@@ -229,7 +236,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                 }
                                 else
                                 {
-                                    Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_LONG).show();
 
                                     //playmovie(flag2);
 
@@ -257,7 +264,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                                     if(selectedPosition==0)
                                                     {
-                                                        Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
+                                                        //Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
 
                                                         Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag2, PlayerActivity.TYPE_OTHER);
 
@@ -271,7 +278,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                     }
                                                     else
                                                     {
-                                                        Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
+                                                        //Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
 
                                                         Uri intentUri = Uri.parse(flag2);
 
@@ -354,24 +361,21 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                 int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 
-                                if(selectedPosition==0)
-                                {
+                                if (selectedPosition == 0) {
                                     //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_LONG).show();
 
                                     //playmovie(flag1);
                                     Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                                    intent.putExtra("movie",flag1);
+                                    intent.putExtra("movie", flag1);
                                     startService(intent);
                                     Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_LONG).show();
 
 
-                                }
-                                else
-                                {
+                                } else {
                                     //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_LONG).show();
 
                                     Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                                    intent.putExtra("movie",flag2);
+                                    intent.putExtra("movie", flag2);
                                     startService(intent);
                                     Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_LONG).show();
                                 }
@@ -393,6 +397,49 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
             }
         });
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                sendbar = String.valueOf(v);
+            }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","bobbyrana1983@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, sendbar);
+
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch(id) {
+
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -417,6 +464,8 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
     public void onBackPressed() {
         startAppAd.onBackPressed();
         super.onBackPressed();
+        overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+
     }
 
 

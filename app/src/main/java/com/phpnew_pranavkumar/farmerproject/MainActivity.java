@@ -3,23 +3,28 @@ package com.phpnew_pranavkumar.farmerproject;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.onesignal.OneSignal;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieegtAdapter;
@@ -85,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "211895003", false);
+
         setContentView(R.layout.activity_main);
 
 
         OneSignal.enableNotificationsWhenActive(true);
 
-        StartAppSDK.init(this, "211895003", true);
 
         relativeLayout = (RelativeLayout) findViewById(R.id.mainlayout);
 
@@ -117,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         mal = (Button) findViewById(R.id.Buttonmal);
 
 
+//        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Hello Snackbar", Snackbar.LENGTH_LONG).show();
+//            }
+//        });
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 i.putParcelableArrayListExtra("cars", feedMovieList);
 
                 startActivity(i);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -139,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 ipp.putParcelableArrayListExtra("cars", feedMovieListsec);
 
                 startActivity(ipp);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
 
@@ -153,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
                 ie.putParcelableArrayListExtra("cars", feedMovieListtrd);
 
                 startActivity(ie);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -166,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
                 ih.putParcelableArrayListExtra("cars", feedMovieListfor);
 
                 startActivity(ih);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -179,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                 ik.putParcelableArrayListExtra("cars", feedMovieListfiv);
 
                 startActivity(ik);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -191,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
                 itlgu.putParcelableArrayListExtra("cars", feedMovieListsix);
 
                 startActivity(itlgu);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -203,6 +227,8 @@ public class MainActivity extends AppCompatActivity {
                 itml.putParcelableArrayListExtra("cars", feedMovieListsvn);
 
                 startActivity(itml);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -215,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListegt);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -229,6 +257,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListtrd);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -241,6 +271,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListfor);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -253,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListfiv);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -265,6 +299,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListsvn);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -277,6 +313,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListsix);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -289,6 +327,8 @@ public class MainActivity extends AppCompatActivity {
                 imal.putParcelableArrayListExtra("cars", feedMovieListegt);
 
                 startActivity(imal);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
                 startAppAd.showAd();
                 startAppAd.loadAd();
             }
@@ -433,6 +473,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         startAppAd.onBackPressed();
         super.onBackPressed();
+       // overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+
 //        FragmentManager fm = getSupportFragmentManager();
 //        if (fm.getBackStackEntryCount() > 0) {
 //            super.onBackPressed();
@@ -456,8 +498,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 //Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
 
-//                Intent i=new Intent(this,ViewPagerActivity.class);
-//                startActivity(i);
+                Intent i=new Intent(this,AboutUs.class);
+                startActivity(i);
+                return true;
+
+            case R.id.action_open:
+                //Toast.makeText(getApplicationContext(), "Item open Selected", Toast.LENGTH_LONG).show();
+
+                displayLicensesAlertDialog();
+
                 return true;
 
             default:
@@ -465,6 +514,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void displayLicensesAlertDialog() {
+        WebView view = (WebView) LayoutInflater.from(this).inflate(R.layout.dailog_licenses, null);
+        view.loadUrl("file:///android_asset/open_source_licenses.html");
+        AlertDialog mAlertDialog = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+                .setTitle("")
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
 
     private class DownloadJSON extends AsyncTask<String, String, String> {
 
@@ -691,6 +749,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -710,6 +769,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -729,6 +789,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -748,6 +809,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -770,6 +832,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -790,6 +853,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -810,6 +874,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }
@@ -832,6 +897,7 @@ public class MainActivity extends AppCompatActivity {
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
+            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
 
         }

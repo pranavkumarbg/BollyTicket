@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2015 Pranavkumar Gorawar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.phpnew_pranavkumar.farmerproject"
-    >
+    package="com.phpnew_pranavkumar.farmerproject">
 
     <supports-screens
         android:anyDensity="true"
@@ -12,18 +26,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
     <application
         android:name=".AppData"
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -69,10 +83,11 @@
 
         </activity>
 
-        <activity android:name=".PlayerActivity"
+        <activity
+            android:name=".PlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/PlayerTheme"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/PlayerTheme">
 
         </activity>
 
@@ -80,7 +95,8 @@
             android:name=".services.MovieDownloadService"
             android:exported="false" />
 
-        <activity android:name=".EnglishActivity"
+        <activity
+            android:name=".EnglishActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -91,7 +107,8 @@
                 android:value=".SearchResultsActivity" />
 
         </activity>
-        <activity android:name=".HindiActivity"
+        <activity
+            android:name=".HindiActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -102,7 +119,8 @@
                 android:value=".SearchResultsActivity" />
 
         </activity>
-        <activity android:name=".KannadaActivity"
+        <activity
+            android:name=".KannadaActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -112,7 +130,8 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchkanmalActivity" />
         </activity>
-        <activity android:name=".TeluguActivity"
+        <activity
+            android:name=".TeluguActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -123,7 +142,8 @@
                 android:value=".SearchResultsActivity" />
 
         </activity>
-        <activity android:name=".TamilActivity"
+        <activity
+            android:name=".TamilActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -134,7 +154,8 @@
                 android:value=".SearchResultsActivity" />
 
         </activity>
-        <activity android:name=".MalayalamActivity"
+        <activity
+            android:name=".MalayalamActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -145,7 +166,8 @@
                 android:value=".SearchkanmalActivity" />
 
         </activity>
-        <activity android:name=".MovieFullActivityNew"
+        <activity
+            android:name=".MovieFullActivityNew"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -155,16 +177,19 @@
         </activity>
 
 
-        <activity android:name="com.startapp.android.publish.list3d.List3DActivity"
+        <activity
+            android:name="com.startapp.android.publish.list3d.List3DActivity"
             android:theme="@android:style/Theme" />
 
-        <activity android:name="com.startapp.android.publish.OverlayActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.startapp.android.publish.OverlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent" />
 
-        <activity android:name="com.startapp.android.publish.FullScreenActivity"
-            android:theme="@android:style/Theme"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.startapp.android.publish.FullScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme" />
 
 
         <activity
@@ -199,7 +224,8 @@
 
         </activity>
 
-        <activity android:name=".AboutUs"
+        <activity
+            android:name=".AboutUs"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data

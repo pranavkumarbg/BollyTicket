@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2015 Pranavkumar Gorawar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -295,8 +295,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
       player.addListener(eventLogger);
       player.setInfoListener(eventLogger);
       player.setInternalErrorListener(eventLogger);
-      debugViewHelper = new DebugTextViewHelper(player, debugTextView);
-      debugViewHelper.start();
+     // debugViewHelper = new DebugTextViewHelper(player, debugTextView);
+     //debugViewHelper.start();
     }
     if (playerNeedsPrepare) {
       player.prepare();
@@ -310,8 +310,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
 
   private void releasePlayer() {
     if (player != null) {
-      debugViewHelper.stop();
-      debugViewHelper = null;
+      //debugViewHelper.stop();
+      //debugViewHelper = null;
       playerPosition = player.getCurrentPosition();
       player.release();
       player = null;
@@ -349,7 +349,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
         text += "unknown";
         break;
     }
-    playerStateTextView.setText(text);
+    //playerStateTextView.setText(text);
     updateButtonVisibilities();
   }
 

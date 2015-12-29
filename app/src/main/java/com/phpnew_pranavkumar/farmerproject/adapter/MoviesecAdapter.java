@@ -17,56 +17,27 @@ package com.phpnew_pranavkumar.farmerproject.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-/**
- * Created by Pranav on 9/2/2015.
- */
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.phpnew_pranavkumar.farmerproject.R;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHolder>{
+
+public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHolder> {
 
     private List<MovieData> feedMovieList = new ArrayList<MovieData>();
     private Context mContext;
@@ -88,73 +59,41 @@ public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        try
-        {
-            Log.d("inside", "onbinder");
+        try {
             String url = feedMovieList.get(position).moviethumbnail;
 
-            String name=feedMovieList.get(position).moviename;
+            String name = feedMovieList.get(position).moviename;
 
             holder.placeName.setText(name);
-           // holder.placeName.setTextSize(10);
-           // holder.placeName.setTypeface(null, Typeface.BOLD);
 
-//            String fontPath = "fonts/Face Your Fears.ttf";
-//
-//                       // Loading Font Face
-//            Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
-//
-//            // Applying font
-//            txtGhost.setTypeface(tf);
-
-//            Glide.with(mContext)
-//                    .load(url)
-//                    .asBitmap()
-//                    .placeholder(R.drawable.video_placeholder)
-//
-//                    .into(new BitmapImageViewTarget(holder.placeImage) {
-//
-//                        @Override
-//                        public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-//                            super.onResourceReady(resource, glideAnimation);
-//
-//
-//                            Palette.generateAsync(resource, new Palette.PaletteAsyncListener() {
-//                                @Override
-//                                public void onGenerated(Palette palette) {
-//
-//                                    int mutedLight = palette.getVibrantColor(mContext.getResources().getColor(android.R.color.black));
-//                                    holder.placeNameHolder.setBackgroundColor(mutedLight);
-//                                }
-//                            });
-//
-//                        }
-//                    });
-
-
-
-            Picasso.with(mContext)
+            Glide.with(mContext)
                     .load(url)
-                    .transform(PaletteTransformation.instance())
-                    .resize(200,200)
+                    .asBitmap()
+                    .placeholder(R.drawable.video_placeholder)
+                    .thumbnail(0.5f)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(new BitmapImageViewTarget(holder.placeImage) {
 
-                    .into(holder.placeImage, new Callback.EmptyCallback() {
-                        @Override public void onSuccess() {
-                            Bitmap bitmap = ((BitmapDrawable) holder.placeImage.getDrawable()).getBitmap(); // Ew!
-                            Palette palette = PaletteTransformation.getPalette(bitmap);
-                            // TODO apply palette to text views, backgrounds, etc.
+                        @Override
+                        public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation) {
+                            super.onResourceReady(resource, glideAnimation);
 
 
-                            int mutedLight = palette.getVibrantColor(mContext.getResources().getColor(android.R.color.black));
-                            int newcolr=mContext.getResources().getColor(R.color.monsoon);
-                            holder.placeNameHolder.setBackgroundColor(mutedLight);
+                            Palette.generateAsync(resource, new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(Palette palette) {
+
+                                    int mutedLight = palette.getVibrantColor(mContext.getResources().getColor(android.R.color.black));
+                                    holder.placeNameHolder.setBackgroundColor(mutedLight);
+
+
+                                }
+                            });
 
                         }
                     });
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
 
@@ -163,14 +102,9 @@ public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHo
 
 
     @Override
-    public int getItemCount()
-    {
-        //return feedMovieList.size();
+    public int getItemCount() {
         return 10;
     }
-
-
-
 
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -211,8 +145,6 @@ public class MoviesecAdapter extends RecyclerView.Adapter<MoviesecAdapter.ViewHo
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-
-
 
 
 }

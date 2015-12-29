@@ -23,37 +23,6 @@ public class MovieData implements Parcelable {
     public String movieurl;
     public String moviename;
 
-
-
-//    public String getMovieurl() {
-//        return movieurl;
-//    }
-//
-//    public void setMovieurl(String movieurl) {
-//        this.movieurl = movieurl;
-//    }
-//
-//
-//
-//    public String getMoviethumbnail() {
-//        return moviethumbnail;
-//    }
-//
-//    public void setMoviethumbnail(String moviethumbnail) {
-//        this.moviethumbnail = moviethumbnail;
-//    }
-//
-//
-//
-//    public String getMoviename() {
-//        return moviename;
-//    }
-//
-//    public void setMoviename(String moviename) {
-//        this.moviename = moviename;
-//    }
-//
-
     public MovieData(Parcel source) {
         moviethumbnail = source.readString();
         movieurl = source.readString();

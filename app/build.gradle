@@ -23,8 +23,8 @@ android {
         applicationId "com.phpnew_pranavkumar.farmerproject"
 
         defaultConfig {
-            manifestPlaceholders = [manifestApplicationId: "${applicationId}",
-                                    onesignal_app_id: "b396b15d-94b4-4d4b-ad1a-1fb4678b8758",
+            manifestPlaceholders = [manifestApplicationId          : "${applicationId}",
+                                    onesignal_app_id               : "b396b15d-94b4-4d4b-ad1a-1fb4678b8758",
                                     onesignal_google_project_number: "478890327729"]
         }
 

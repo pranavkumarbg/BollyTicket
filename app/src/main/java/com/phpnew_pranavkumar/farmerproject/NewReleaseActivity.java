@@ -18,33 +18,21 @@ package com.phpnew_pranavkumar.farmerproject;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.startapp.android.publish.StartAppAd;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,30 +54,24 @@ public class NewReleaseActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarrls);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
-        //ab.setHomeAsUpIndicator(R.drawable.ic_home);
         ab.setTitle("New Release");
         ab.setDisplayHomeAsUpEnabled(true);
 
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
-        // new DownloadJSON().execute();
 
         Intent i = this.getIntent();
-        feedMovieList =  i.getParcelableArrayListExtra("cars");
+        feedMovieList = i.getParcelableArrayListExtra("cars");
 
         appData = new Bundle();
         appData.putParcelableArrayList("cars", feedMovieList);
 
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.list);
+        mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 
-        //gaggeredGridLayoutManager= new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
-
-
-        // StaggeredGridLayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2,1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
@@ -142,7 +124,7 @@ public class NewReleaseActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
 
             case android.R.id.home:
                 finish();
@@ -153,8 +135,7 @@ public class NewReleaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    NewReleaseAdapter.OnItemClickListener onItemClickListener=new NewReleaseAdapter.OnItemClickListener()
-    {
+    NewReleaseAdapter.OnItemClickListener onItemClickListener = new NewReleaseAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -163,15 +144,13 @@ public class NewReleaseActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
 
-            String url=feedMovieList.get(position).movieurl;
-            String image=feedMovieList.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            String url = feedMovieList.get(position).movieurl;
+            String image = feedMovieList.get(position).moviethumbnail;
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
 
             overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
 
 
         }

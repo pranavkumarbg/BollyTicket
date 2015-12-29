@@ -18,51 +18,34 @@ package com.phpnew_pranavkumar.farmerproject;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewKanAdapter;
-import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
-import com.phpnew_pranavkumar.farmerproject.adapter.PopularAdapter;
-import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
 import com.phpnew_pranavkumar.farmerproject.bean.NewMovieData;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.startapp.android.publish.StartAppAd;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class KannadaActivity extends AppCompatActivity
-{
+public class KannadaActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     private StartAppAd startAppAd = new StartAppAd(this);
     NewKanAdapter mAdapter;
-    ArrayList<NewMovieData> feedMovieList=new ArrayList<NewMovieData>();
+    ArrayList<NewMovieData> feedMovieList = new ArrayList<NewMovieData>();
     Bundle appData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kannada);
 
@@ -73,13 +56,13 @@ public class KannadaActivity extends AppCompatActivity
         ab.setDisplayHomeAsUpEnabled(true);
 
         Intent i = this.getIntent();
-        feedMovieList =  i.getParcelableArrayListExtra("cars");
+        feedMovieList = i.getParcelableArrayListExtra("cars");
 
         appData = new Bundle();
         appData.putParcelableArrayList("cars", feedMovieList);
 
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.listkan);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listkan);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
@@ -132,7 +115,7 @@ public class KannadaActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
 
             case android.R.id.home:
                 finish();
@@ -143,26 +126,23 @@ public class KannadaActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    NewKanAdapter.OnItemClickListener onItemClickListener=new NewKanAdapter.OnItemClickListener()
-    {
+    NewKanAdapter.OnItemClickListener onItemClickListener = new NewKanAdapter.OnItemClickListener() {
 
         @Override
-        public void onItemClick(View view, int position)
-        {
+        public void onItemClick(View view, int position) {
 
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
 
-            String url1=feedMovieList.get(position).movieurl1;
-            String url2=feedMovieList.get(position).movieurl2;
-            String image=feedMovieList.get(position).moviethumbnail;
+            String url1 = feedMovieList.get(position).movieurl1;
+            String url2 = feedMovieList.get(position).movieurl2;
+            String image = feedMovieList.get(position).moviethumbnail;
 
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
             overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
 
 
         }

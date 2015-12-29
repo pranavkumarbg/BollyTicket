@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -44,7 +43,8 @@ public class AppData extends Application {
         OneSignal.startInit(this)
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .setAutoPromptLocation(true)
-                .init();;
+                .init();
+        ;
         if (DEVELOPER_MODE
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -89,10 +89,7 @@ public class AppData extends Application {
         public void notificationOpened(String message, JSONObject additionalData, boolean isActive) {
             try {
                 if (additionalData != null) {
-//                    if (additionalData.has("actionSelected"))
-//                        Log.d("OneSignalExample", "OneSignal notification button with id " + additionalData.getString("actionSelected") + " pressed");
 
-                    Log.d("OneSignalExample", "additionalData---:\n" + additionalData.toString());
                 }
             } catch (Throwable t) {
                 t.printStackTrace();

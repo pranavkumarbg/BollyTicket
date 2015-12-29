@@ -33,7 +33,7 @@ public class NewMovieData implements Parcelable {
         moviename = source.readString();
     }
 
-    public NewMovieData(String moviethumbnail, String movieurl1,String movieurl2, String moviename) {
+    public NewMovieData(String moviethumbnail, String movieurl1, String movieurl2, String moviename) {
         this.moviethumbnail = moviethumbnail;
         this.movieurl1 = movieurl1;
         this.movieurl2 = movieurl2;

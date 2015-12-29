@@ -15,36 +15,29 @@
  */
 package com.phpnew_pranavkumar.farmerproject.adapter;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.phpnew_pranavkumar.farmerproject.MovieFullActivity;
 import com.phpnew_pranavkumar.farmerproject.R;
 import com.phpnew_pranavkumar.farmerproject.bean.Product;
 import com.phpnew_pranavkumar.farmerproject.fragment.HomeFragment;
-import com.phpnew_pranavkumar.farmerproject.fragment.ProductDetailFragment;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ImageSlideAdapter extends PagerAdapter {
     ImageLoader imageLoader = ImageLoader.getInstance();
@@ -86,31 +79,8 @@ public class ImageSlideAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Bundle arguments = new Bundle();
-                //Fragment fragment = null;
-                Log.d("position adapter", "" + position);
                 Product product = (Product) products.get(position);
                 arguments.putParcelable("singleProduct", product);
-
-                // Start a new fragment
-//                fragment = new ProductDetailFragment();
-//                fragment.setArguments(arguments);
-//
-//                FragmentTransaction transaction = activity
-//                        .getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.content_frame, fragment,
-//                        ProductDetailFragment.ARG_ITEM_ID);
-//                transaction.addToBackStack(ProductDetailFragment.ARG_ITEM_ID);
-//                transaction.commit();
-
-               // Intent transitionIntent = new Intent(activity, MovieFullActivity.class);
-
-
-                //String url=feedMovieList.get(position).movieurl;
-                //String image=feedMovieList.get(position).moviethumbnail;
-                //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
-                //transitionIntent.putExtra("flagurl", url);
-                //transitionIntent.putExtra("flagimage",image);
-                //startActivity(transitionIntent);
 
 
             }

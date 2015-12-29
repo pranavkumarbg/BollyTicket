@@ -50,7 +50,7 @@
     <string name="drm_error_unsupported_scheme">This device does not support the required DRM scheme</string>
 
     <string name="drm_error_unknown">An unknown DRM error occurred</string>
-    <string name="search_hint">search here</string>
+    <string name="search_hint">Enter Movie Name</string>
     <string name="version">version 1.0</string>
     <string name="english">English</string>
 

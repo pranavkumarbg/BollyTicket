@@ -24,7 +24,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,7 +53,7 @@ public class JSONParser {
     }
 
     private void openHttpUrlConnection(String urlString) throws IOException {
-        Log.d("urlstring in parser", urlString+"");
+        Log.d("urlstring in parser", urlString + "");
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
 
@@ -80,7 +79,6 @@ public class JSONParser {
                 new InputStreamReader(inputStream, "UTF-8"), 8);
     }
 
-    // using HttpClient for <= Froyo
     public JSONObject getJSONHttpClient(String url)
             throws ClientProtocolException, IOException, JSONException {
         JSONObject jsonObject = null;
@@ -105,7 +103,6 @@ public class JSONParser {
         return jsonObject;
     }
 
-    // using HttpURLConnection for > Froyo
     public JSONObject getJSONHttpURLConnection(String urlString)
             throws IOException, JSONException {
 

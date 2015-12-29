@@ -16,7 +16,6 @@
 package com.phpnew_pranavkumar.farmerproject;
 
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,11 +39,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.phpnew_pranavkumar.farmerproject.services.MovieDownloadService;
@@ -57,30 +56,24 @@ import java.util.concurrent.TimeUnit;
 
 public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
-    RelativeLayout relativeLayout;
-    ImageView imageView,imageViewlol;
+    ImageView imageView;
     private StartAppAd startAppAd = new StartAppAd(this);
 
     private static final int BACKGROUND_IMAGES_WIDTH = 360;
     private static final int BACKGROUND_IMAGES_HEIGHT = 360;
     private static final float BLUR_RADIUS = 25F;
     private final Handler handler = new Handler();
-    AlertDialog levelDialog;
-    final CharSequence[] items = {" Internal Player "," External Player "};
     private BlurTransformation blurTransformation;
-    private int backgroundIndex;
     private Point backgroundImageTargetSize;
     String image;
-    String flag1,flag2;
-    Button watch,downlaod,send;
+    String flag1, flag2;
+    Button watch, downlaod, send;
     ProgressBar progressBar;
-    ProgressDialog progressDialog;
     String sendbar;
     RatingBar ratingBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.moviefullview);
 
@@ -88,11 +81,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         blurTransformation = new BlurTransformation(this, BLUR_RADIUS);
         backgroundImageTargetSize = calculateBackgroundImageSizeCroppedToScreenAspectRatio(getWindowManager().getDefaultDisplay());
 
-//        progressDialog = new ProgressDialog(MovieFullActivity.this,
-//                R.style.AppTheme_Dark_Dialog);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("Loading..........");
-//        progressDialog.setTitle("Movie");
 
         updateWindowBackground();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarfull);
@@ -100,39 +88,32 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("Movie");
         ab.setDisplayHomeAsUpEnabled(true);
-        ScrollView scrollView=(ScrollView) findViewById(R.id.scrollView);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         scrollView.setSmoothScrollingEnabled(true);
-        imageView=(ImageView)findViewById(R.id.imageViewfull);
+        imageView = (ImageView) findViewById(R.id.imageViewfull);
         Intent i = getIntent();
 
-        flag1= i.getStringExtra("flagurl1");
-        flag2= i.getStringExtra("flagurl2");
+        flag1 = i.getStringExtra("flagurl1");
+        flag2 = i.getStringExtra("flagurl2");
 
-        //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_SHORT).show();
+        image = i.getStringExtra("flagimage");
 
-        image=i.getStringExtra("flagimage");
-
-        watch=(Button)findViewById(R.id.Button04);
-        downlaod=(Button)findViewById(R.id.Button05);
-        ratingBar=(RatingBar)findViewById(R.id.rating);
-        send=(Button)findViewById(R.id.buttonsend);
+        watch = (Button) findViewById(R.id.Button04);
+        downlaod = (Button) findViewById(R.id.Button05);
+        ratingBar = (RatingBar) findViewById(R.id.rating);
+        send = (Button) findViewById(R.id.buttonsend);
 
         Glide.with(this)
                 .load(image)
                 .asBitmap()
                 .placeholder(R.drawable.video_placeholder)
-                .thumbnail(0.5f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new BitmapImageViewTarget(imageView) {
 
                     @Override
                     public void onResourceReady(final Bitmap resource, GlideAnimation glideAnimation) {
                         super.onResourceReady(resource, glideAnimation);
-
-                        //progressDialog.dismiss();
-
-                        //progressBar.setVisibility(View.GONE);
 
 
                     }
@@ -145,41 +126,28 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivityNew.this, R.style.MyDialogTheme);
-                //builder.setTitle("Movie");
-                //builder.setMessage("Select part1 or part2");
-//                builder.setPositiveButton("play", null);
-//                builder.setNegativeButton("Cancel", null);
-//                builder.show();
+
 
                 builder.setTitle("Choose One")
 
-                        // specify the list array, the items to be selected by default (null for none),
-                        // and the listener through which to receive call backs when items are selected
-                        // again, R.array.choices were set in the resources res/values/strings.xml
+
                         .setSingleChoiceItems(R.array.choices, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
 
 
-                                //Toast.makeText(getApplicationContext(), "Some actions maybe? Selected index: " + arg1, Toast.LENGTH_LONG).show();
                             }
 
                         })
 
-                                // Set the action buttons
                         .setPositiveButton("Play", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                // user clicked OK, so save the mSelectedItems results somewhere
-                                // or return them to the component that opened the dialog
 
                                 int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 
-                                if(selectedPosition==0)
-                                {
-                                    //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_LONG).show();
+                                if (selectedPosition == 0) {
 
-                                    //playmovie(flag1);
 
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivityNew.this, R.style.MyDialogTheme);
 
@@ -194,20 +162,15 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                             })
 
-                                                    // Set the action buttons
                                             .setPositiveButton("Play", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    // user clicked OK, so save the mSelectedItems results somewhere
-                                                    // or return them to the component that opened the dialog
 
                                                     int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 
-                                                    if(selectedPosition==0)
-                                                    {
-                                                        //Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
+                                                    if (selectedPosition == 0) {
 
-                                                        Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag1, PlayerActivity.TYPE_OTHER);
+                                                        Samples.Sample sample = new Samples.Sample("Android screens (Matroska)", flag1, PlayerActivity.TYPE_OTHER);
 
                                                         Intent mpdIntent = new Intent(MovieFullActivityNew.this, PlayerActivity.class)
 
@@ -216,10 +179,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                                 .putExtra(PlayerActivity.CONTENT_TYPE_EXTRA, sample.type);
                                                         startActivity(mpdIntent);
 
-                                                    }
-                                                    else
-                                                    {
-                                                        //Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
+                                                    } else {
 
                                                         Uri intentUri = Uri.parse(flag1);
 
@@ -228,7 +188,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                         intent.setDataAndType(intentUri, "video/*");
                                                         startActivity(intent);
                                                     }
-                                                    //Toast.makeText(getApplicationContext(), "selectedPosition: " + selectedPosition, Toast.LENGTH_LONG).show();
 
 
                                                 }
@@ -237,19 +196,13 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    // removes the dialog from the screen
 
                                                 }
                                             })
 
                                             .show();
 
-                                }
-                                else
-                                {
-                                    //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_LONG).show();
-
-                                    //playmovie(flag2);
+                                } else {
 
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivityNew.this, R.style.MyDialogTheme);
 
@@ -264,20 +217,15 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
                                             })
 
-                                                    // Set the action buttons
                                             .setPositiveButton("Play", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    // user clicked OK, so save the mSelectedItems results somewhere
-                                                    // or return them to the component that opened the dialog
 
                                                     int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 
-                                                    if(selectedPosition==0)
-                                                    {
-                                                        //Toast.makeText(getApplicationContext(), "selected: internal", Toast.LENGTH_LONG).show();
+                                                    if (selectedPosition == 0) {
 
-                                                        Samples.Sample sample=new Samples.Sample("Android screens (Matroska)", flag2, PlayerActivity.TYPE_OTHER);
+                                                        Samples.Sample sample = new Samples.Sample("Android screens (Matroska)", flag2, PlayerActivity.TYPE_OTHER);
 
                                                         Intent mpdIntent = new Intent(MovieFullActivityNew.this, PlayerActivity.class)
 
@@ -286,10 +234,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                                 .putExtra(PlayerActivity.CONTENT_TYPE_EXTRA, sample.type);
                                                         startActivity(mpdIntent);
 
-                                                    }
-                                                    else
-                                                    {
-                                                        //Toast.makeText(getApplicationContext(), "selected: external", Toast.LENGTH_LONG).show();
+                                                    } else {
 
                                                         Uri intentUri = Uri.parse(flag2);
 
@@ -298,7 +243,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                                         intent.setDataAndType(intentUri, "video/*");
                                                         startActivity(intent);
                                                     }
-                                                    //Toast.makeText(getApplicationContext(), "selectedPosition: " + selectedPosition, Toast.LENGTH_LONG).show();
 
 
                                                 }
@@ -307,14 +251,13 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    // removes the dialog from the screen
+
 
                                                 }
                                             })
 
                                             .show();
                                 }
-                                //Toast.makeText(getApplicationContext(), "selectedPosition: " + selectedPosition, Toast.LENGTH_LONG).show();
 
 
                             }
@@ -323,14 +266,11 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                // removes the dialog from the screen
 
                             }
                         })
 
                         .show();
-
-
 
 
             }
@@ -342,40 +282,28 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivityNew.this, R.style.MyDialogTheme);
-                //builder.setTitle("Movie");
-                //builder.setMessage("Select part1 or part2");
-//                builder.setPositiveButton("play", null);
-//                builder.setNegativeButton("Cancel", null);
-//                builder.show();
+
 
                 builder.setTitle("Choose One")
 
-                        // specify the list array, the items to be selected by default (null for none),
-                        // and the listener through which to receive call backs when items are selected
-                        // again, R.array.choices were set in the resources res/values/strings.xml
+
                         .setSingleChoiceItems(R.array.choices, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
 
 
-                                //Toast.makeText(getApplicationContext(), "Some actions maybe? Selected index: " + arg1, Toast.LENGTH_LONG).show();
                             }
 
                         })
 
-                                // Set the action buttons
                         .setPositiveButton("Download", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                // user clicked OK, so save the mSelectedItems results somewhere
-                                // or return them to the component that opened the dialog
 
                                 int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
 
                                 if (selectedPosition == 0) {
-                                    //Toast.makeText(getApplicationContext(), flag1, Toast.LENGTH_LONG).show();
 
-                                    //playmovie(flag1);
                                     Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
                                     intent.putExtra("movie", flag1);
                                     startService(intent);
@@ -383,14 +311,12 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
 
                                 } else {
-                                    //Toast.makeText(getApplicationContext(), flag2, Toast.LENGTH_LONG).show();
 
                                     Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
                                     intent.putExtra("movie", flag2);
                                     startService(intent);
                                     Toast.makeText(getApplicationContext(), "Download started", Toast.LENGTH_LONG).show();
                                 }
-                                //Toast.makeText(getApplicationContext(), "selectedPosition: " + selectedPosition, Toast.LENGTH_LONG).show();
 
 
                             }
@@ -399,7 +325,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                // removes the dialog from the screen
 
                             }
                         })
@@ -421,7 +346,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
             public void onClick(View view) {
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto","bobbyrana1983@gmail.com", null));
+                        "mailto", "bobbyrana1983@gmail.com", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, sendbar);
 
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
@@ -442,7 +367,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
 
             case android.R.id.home:
                 finish();
@@ -470,7 +395,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
     }
 
 
-
     @Override
     public void onBackPressed() {
         startAppAd.onBackPressed();
@@ -478,7 +402,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
 
     }
-
 
 
     @Override
@@ -496,22 +419,18 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         changeBackground(new BitmapDrawable(getResources(), bitmap));
         progressBar.setVisibility(View.GONE);
-        // progressDialog.dismiss();
-        startAppAd.showAd(); // show the ad
-        startAppAd.loadAd(); // load the next ad
+        startAppAd.showAd();
+        startAppAd.loadAd();
     }
 
     @Override
     public void onPrepareLoad(Drawable placeHolderDrawable) {
-        // just prepare mentally
     }
 
     private void updateWindowBackground() {
 
         progressBar.setVisibility(View.VISIBLE);
 
-
-        //progressDialog.show();
 
         Picasso.with(this).load(image)
                 .resize(backgroundImageTargetSize.x, backgroundImageTargetSize.y).centerCrop()
@@ -523,7 +442,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
             }
         }, TimeUnit.SECONDS.toMillis(1));
     }
-
 
 
     private void changeBackground(Drawable drawable) {
@@ -539,7 +457,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             view.setBackground(drawable);
         } else {
-            //noinspection deprecation
             view.setBackgroundDrawable(drawable);
         }
     }
@@ -564,7 +481,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
             screenSize.y = display.getHeight();
         }
     }
-
 
 
 }

@@ -23,28 +23,17 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.startapp.android.publish.StartAppAd;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -70,32 +59,20 @@ public class SearchResultsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarsrch);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
-        //ab.setHomeAsUpIndicator(R.drawable.ic_home);
         ab.setTitle("Search");
         ab.setDisplayHomeAsUpEnabled(true);
 
-        // new DownloadJSON().execute();
 
         Bundle appData = getIntent().getBundleExtra(SearchManager.APP_DATA);
-        feedMovieList =  appData.getParcelableArrayList("cars");
+        feedMovieList = appData.getParcelableArrayList("cars");
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.listsrch);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listsrch);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 
-        //gaggeredGridLayoutManager= new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
-        //Toast.makeText(this,"search activity",Toast.LENGTH_LONG).show();
-
-
-        // StaggeredGridLayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2,1);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-       // mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieList);
-
-        //mRecyclerView.setAdapter(mAdapter);
-
-        //mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
 
@@ -112,11 +89,8 @@ public class SearchResultsActivity extends AppCompatActivity {
             query = intent.getStringExtra(SearchManager.QUERY);
 
             feedMovieListnext.clear();
-           // feedMovieList.clear();
 
             new DownloadJSON().execute();
-           // Toast.makeText(this,query,Toast.LENGTH_LONG).show();
-
 
         }
     }
@@ -163,7 +137,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
 
             case android.R.id.home:
                 finish();
@@ -198,39 +172,13 @@ public class SearchResultsActivity extends AppCompatActivity {
                 MovieData sk = feedMovieList.get(j);
                 String moviename = sk.moviename.toLowerCase();
 
-               // String moviename =feedMovieList.get(j).moviename;
-
-                //Toast.makeText(getApplicationContext(),moviename,Toast.LENGTH_LONG).show();
                 int index1 = moviename.indexOf(query);
-                // if(moviename.contains(query))
-                if (index1 != -1 || moviename.contains(query))
-                {
-
-                    //Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
-
-//                    MovieData item1 = new MovieData();
-//                    // ArrayList<MovieData> feedMovieListnew = new ArrayList<MovieData>();
-//
-//                    item1.setMoviename(feedMovieList.get(j).getMoviename());
-//                    item1.setMoviethumbnail(feedMovieList.get(j).getMoviethumbnail());
-//                    item1.setMovieurl(feedMovieList.get(j).getMovieurl());
-
-
+                if (index1 != -1 || moviename.contains(query)) {
                     feedMovieListnext.add(new MovieData(feedMovieList.get(j).moviethumbnail, feedMovieList.get(j).movieurl, feedMovieList.get(j).moviename));
-
-
-                    // feedMovieListnext.add(item1);
-
 
                     mAdapter = new NewReleaseAdapter(getApplicationContext(), feedMovieListnext);
 
                     mRecyclerView.setAdapter(mAdapter);
-
-                    if(feedMovieListnext.isEmpty())
-                    {
-                        Toast.makeText(getApplication(),"No Movie found",Toast.LENGTH_LONG).show();
-                    }
-
 
                     mAdapter.setOnItemClickListener(onItemClickListener);
 
@@ -241,9 +189,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
 
-
-    NewReleaseAdapter.OnItemClickListener onItemClickListener=new NewReleaseAdapter.OnItemClickListener()
-    {
+    NewReleaseAdapter.OnItemClickListener onItemClickListener = new NewReleaseAdapter.OnItemClickListener() {
 
         @Override
         public void onItemClick(View view, int position) {
@@ -252,14 +198,11 @@ public class SearchResultsActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
 
-            String url=feedMovieListnext.get(position).movieurl;
-            String image=feedMovieListnext.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
+            String url = feedMovieListnext.get(position).movieurl;
+            String image = feedMovieListnext.get(position).moviethumbnail;
             transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage",image);
+            transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
-
-
 
 
         }

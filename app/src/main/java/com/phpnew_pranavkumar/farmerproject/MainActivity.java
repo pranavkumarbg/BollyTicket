@@ -15,21 +15,19 @@
  */
 package com.phpnew_pranavkumar.farmerproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +37,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.onesignal.OneSignal;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieegtAdapter;
@@ -49,7 +46,6 @@ import com.phpnew_pranavkumar.farmerproject.adapter.MoviesecAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviesixAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MoviesvnAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovietrdAdapter;
-import com.phpnew_pranavkumar.farmerproject.adapter.NewReleaseAdapter;
 import com.phpnew_pranavkumar.farmerproject.adapter.NewRlsAdapter;
 import com.phpnew_pranavkumar.farmerproject.bean.MovieData;
 import com.phpnew_pranavkumar.farmerproject.bean.NewMovieData;
@@ -61,7 +57,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.StartAppSDK;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment contentFragment;
     HomeFragment homeFragment;
 
-    Button b, bsec, btrd, bfor, bfiv, bsix, bsvn, begt,eng,hnd,kan,tam,tlgu,mal;
+    Button b, bsec, btrd, bfor, bfiv, bsix, bsvn, begt, eng, hnd, kan, tam, tlgu, mal;
     RecyclerView mRecyclerView, mRecyclerViewsec, mRecyclerViewthr, mRecyclerViewfor, mRecyclerViewfv, mRecyclerViewsx, mRecyclerViewsvn, mRecyclerVieweght;
     RecyclerView.LayoutManager mLayoutManager, mLayoutManagersec, mLayoutManagerthr, mLayoutManagerfor, mLayoutManagerfv, mLayoutManagersx, mLayoutManagersvn, mLayoutManagereght;
     NewRlsAdapter mAdapter;
@@ -115,10 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         relativeLayout = (RelativeLayout) findViewById(R.id.mainlayout);
 
-        //relativeLayout.getBackground().setAlpha(51);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        //progressBar.setVisibility(View.GONE);
 
         b = (Button) findViewById(R.id.button);
         bsec = (Button) findViewById(R.id.buttonsec);
@@ -137,13 +130,6 @@ public class MainActivity extends AppCompatActivity {
         tlgu = (Button) findViewById(R.id.Buttontlgu);
         mal = (Button) findViewById(R.id.Buttonmal);
 
-
-//        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Hello Snackbar", Snackbar.LENGTH_LONG).show();
-//            }
-//        });
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -349,7 +335,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //new DownloadJSON().execute();
 
         scrollView.setSmoothScrollingEnabled(true);
 
@@ -412,7 +397,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Show menu icon
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_home);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -442,11 +426,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
         startAppAd.onResume();
+
     }
 
     @Override
@@ -475,7 +459,6 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
             transaction.replace(R.id.content_frame, fragment, tag);
-            // Only ProductDetailFragment is added to the back stack.
             if (!(fragment instanceof HomeFragment)) {
                 transaction.addToBackStack(tag);
             }
@@ -486,17 +469,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startAppAd.onBackPressed();
-        super.onBackPressed();
-       // overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+        new AlertDialog.Builder(this)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle("Closing App")
+                .setMessage("Are you sure you want to close this App?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
 
-//        FragmentManager fm = getSupportFragmentManager();
-//        if (fm.getBackStackEntryCount() > 0) {
-//            super.onBackPressed();
-//        } else if (contentFragment instanceof HomeFragment
-//                || fm.getBackStackEntryCount() == 0) {
-//            finish();
-//        }
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+
     }
 
     @Override
@@ -511,14 +499,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
 
-                Intent i=new Intent(this,AboutUs.class);
+                Intent i = new Intent(this, AboutUs.class);
                 startActivity(i);
                 return true;
 
             case R.id.action_open:
-                //Toast.makeText(getApplicationContext(), "Item open Selected", Toast.LENGTH_LONG).show();
 
                 displayLicensesAlertDialog();
 
@@ -546,10 +532,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-           // if(feedMovieList.size()==0) {
-                progressBar.setVisibility(View.VISIBLE);
-            //}
-            //feedMovieList.add(getApplication());
+            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -660,7 +644,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjectfiv = jsonarrayfiv.getJSONObject(i);
 
 
-                    feedMovieListfiv.add(new NewMovieData(jsonobjectfiv.optString("thumbnail"), jsonobjectfiv.optString("url1"),jsonobjectfiv.optString("url2"), jsonobjectfiv.optString("moviename")));
+                    feedMovieListfiv.add(new NewMovieData(jsonobjectfiv.optString("thumbnail"), jsonobjectfiv.optString("url1"), jsonobjectfiv.optString("url2"), jsonobjectfiv.optString("moviename")));
 
                 }
 
@@ -689,20 +673,16 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonobjectegt = jsonarrayegt.getJSONObject(i);
 
 
-                    //feedMovieListegt.add(new MovieData(jsonobjectegt.optString("thumbnail"), jsonobjectegt.optString("url"), jsonobjectegt.optString("moviename")));
-
-                    feedMovieListegt.add(new NewMovieData(jsonobjectegt.optString("thumbnail"), jsonobjectegt.optString("url1"),jsonobjectegt.optString("url2"), jsonobjectegt.optString("moviename")));
+                    feedMovieListegt.add(new NewMovieData(jsonobjectegt.optString("thumbnail"), jsonobjectegt.optString("url1"), jsonobjectegt.optString("url2"), jsonobjectegt.optString("moviename")));
                 }
 
 
             } catch (JSONException e) {
-                Log.e("Error", e.getMessage());
                 e.printStackTrace();
             } catch (Exception io) {
                 io.printStackTrace();
             }
 
-            //Log.v("okHTTP",json);
             return null;
         }
 
@@ -741,9 +721,8 @@ public class MainActivity extends AppCompatActivity {
             moviesvnAdapter.setOnItemClickListener(onItemClickListenersvn);
             movieegtAdapter.setOnItemClickListener(onItemClickListeneregt);
 
-            //if(feedMovieList.size()>0) {
-                progressBar.setVisibility(View.GONE);
-            //}
+            progressBar.setVisibility(View.GONE);
+
 
         }
     }
@@ -760,7 +739,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieList.get(position).movieurl;
             String image = feedMovieList.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -780,7 +758,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsec.get(position).movieurl;
             String image = feedMovieListsec.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -800,7 +777,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListtrd.get(position).movieurl;
             String image = feedMovieListtrd.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -820,7 +796,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListfor.get(position).movieurl;
             String image = feedMovieListfor.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -840,9 +815,8 @@ public class MainActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
             String url1 = feedMovieListfiv.get(position).movieurl1;
-            String url2= feedMovieListfiv.get(position).movieurl2;
+            String url2 = feedMovieListfiv.get(position).movieurl2;
             String image = feedMovieListfiv.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);
@@ -864,7 +838,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsix.get(position).movieurl;
             String image = feedMovieListsix.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -885,7 +858,6 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsvn.get(position).movieurl;
             String image = feedMovieListsvn.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -905,9 +877,8 @@ public class MainActivity extends AppCompatActivity {
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
             String url1 = feedMovieListegt.get(position).movieurl1;
-            String url2= feedMovieListegt.get(position).movieurl2;
+            String url2 = feedMovieListegt.get(position).movieurl2;
             String image = feedMovieListegt.get(position).moviethumbnail;
-            //Toast.makeText(getActivity(),url,Toast.LENGTH_LONG).show();
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);

@@ -18,6 +18,7 @@ package com.phpnew_pranavkumar.farmerproject.fragment;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;

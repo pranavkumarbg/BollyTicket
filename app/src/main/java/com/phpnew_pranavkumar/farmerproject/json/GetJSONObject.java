@@ -16,6 +16,7 @@
 package com.phpnew_pranavkumar.farmerproject.json;
 
 import java.io.IOException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,11 +28,9 @@ public class GetJSONObject {
             JSONException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = null;
-        // Use HttpURLConnection
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
             jsonObject = jsonParser.getJSONHttpURLConnection(url);
         } else {
-            // use HttpClient
             jsonObject = jsonParser.getJSONHttpClient(url);
         }
         return jsonObject;

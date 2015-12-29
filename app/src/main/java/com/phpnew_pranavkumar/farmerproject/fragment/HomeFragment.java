@@ -15,14 +15,6 @@
  */
 package com.phpnew_pranavkumar.farmerproject.fragment;
 
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.List;
-
-import org.json.JSONObject;
-
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,8 +25,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,6 +42,12 @@ import com.phpnew_pranavkumar.farmerproject.utils.CirclePageIndicator;
 import com.phpnew_pranavkumar.farmerproject.utils.PageIndicator;
 import com.phpnew_pranavkumar.farmerproject.utils.TagName;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
 
     public static final String ARG_ITEM_ID = "home_fragment";
@@ -59,7 +55,6 @@ public class HomeFragment extends Fragment {
     private static final long ANIM_VIEWPAGER_DELAY = 5000;
     private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
 
-    // UI References
     private ViewPager mViewPager;
     TextView imgNameTxt;
     PageIndicator mIndicator;
@@ -92,7 +87,6 @@ public class HomeFragment extends Fragment {
         findViewById(view);
 
 
-
         mIndicator.setOnPageChangeListener(new PageChangeListener());
         mViewPager.setOnPageChangeListener(new PageChangeListener());
         mViewPager.setOnTouchListener(new OnTouchListener() {
@@ -106,7 +100,6 @@ public class HomeFragment extends Fragment {
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        // calls when touch release on ViewPager
                         if (products != null && products.size() != 0) {
                             stopSliding = false;
                             runnable(products.size());
@@ -116,7 +109,6 @@ public class HomeFragment extends Fragment {
                         break;
 
                     case MotionEvent.ACTION_MOVE:
-                        // calls when ViewPager touch
                         if (handler != null && stopSliding == false) {
                             stopSliding = true;
                             handler.removeCallbacks(animateViewPager);
@@ -133,7 +125,6 @@ public class HomeFragment extends Fragment {
     private void findViewById(View view) {
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
-        //imgNameTxt = (TextView) view.findViewById(R.id.img_name);
     }
 
     public void runnable(final int size) {
@@ -163,11 +154,7 @@ public class HomeFragment extends Fragment {
                     HomeFragment.this));
 
             mIndicator.setViewPager(mViewPager);
-//            imgNameTxt.setText(""
-//                    + ((Product) products.get(mViewPager.getCurrentItem()))
-//                    .getName());
             runnable(products.size());
-            //Re-run callback
             handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
         }
         super.onResume();
@@ -179,7 +166,6 @@ public class HomeFragment extends Fragment {
         if (task != null)
             task.cancel(true);
         if (handler != null) {
-            //Remove callback
             handler.removeCallbacks(animateViewPager);
         }
         super.onPause();
@@ -217,9 +203,7 @@ public class HomeFragment extends Fragment {
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 if (products != null) {
-//                    imgNameTxt.setText(""
-//                            + ((Product) products.get(mViewPager
-//                            .getCurrentItem())).getName());
+
                 }
             }
         }
@@ -277,12 +261,7 @@ public class HomeFragment extends Fragment {
             return products;
         }
 
-        /**
-         * It returns jsonObject for the specified url.
-         *
-         * @param url
-         * @return JSONObject
-         */
+
         public JSONObject getJsonObject(String url) {
             JSONObject jsonObject = null;
             try {
@@ -312,14 +291,11 @@ public class HomeFragment extends Fragment {
                                     activity, products, HomeFragment.this));
 
                             mIndicator.setViewPager(mViewPager);
-//                            imgNameTxt.setText(""
-//                                    + ((Product) products.get(mViewPager
-//                                    .getCurrentItem())).getName());
+
                             runnable(products.size());
                             handler.postDelayed(animateViewPager,
                                     ANIM_VIEWPAGER_DELAY);
                         } else {
-                            //imgNameTxt.setText("No Products");
                         }
                     } else {
                     }

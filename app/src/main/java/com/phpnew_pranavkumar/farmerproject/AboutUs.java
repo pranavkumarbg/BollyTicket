@@ -39,7 +39,6 @@ public class AboutUs extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-
         return true;
     }
 
@@ -48,7 +47,7 @@ public class AboutUs extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
 
             case android.R.id.home:
                 finish();

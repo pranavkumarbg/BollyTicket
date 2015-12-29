@@ -29,32 +29,15 @@ public class PaletteTransformation implements Transformation {
     private static final Map<Bitmap, Palette> CACHE = new WeakHashMap<>();
     private Palette palette;
     private static final Pools.Pool<PaletteTransformation> POOL = new Pools.SynchronizedPool<>(5);
+
     @Override
     public String key() {
         return "";
     }
 
-    public static Palette getPalette(Bitmap bitmap)
-    {
+    public static Palette getPalette(Bitmap bitmap) {
         return CACHE.get(bitmap);
     }
-
-
-//    public Palette getPalette() {
-//        if (palette == null) {
-//            throw new IllegalStateException("Transformation was not run.");
-//        }
-//        return palette;
-//    }
-
-//    @Override public Bitmap transform(Bitmap source) {
-//        if (palette != null) {
-//            throw new IllegalStateException("Instances may only be used once.");
-//        }
-//        palette = Palette.generate(source);
-//        return source;
-//    }
-
 
 
     public static PaletteTransformation getInstance() {
@@ -78,9 +61,11 @@ public class PaletteTransformation implements Transformation {
         return palette;
     }
 
-    private PaletteTransformation() {}
+    private PaletteTransformation() {
+    }
 
-    @Override public Bitmap transform(Bitmap source) {
+    @Override
+    public Bitmap transform(Bitmap source) {
         Palette palette = Palette.generate(source);
         CACHE.put(source, palette);
         return source;

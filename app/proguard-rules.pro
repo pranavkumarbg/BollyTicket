@@ -15,3 +15,21 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn android.support.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn com.squareup.okio.**
+-dontwarn okio.**
+-dontwarn com.startapp.**
+-dontwarn com.google.android.gms.**
+-keep public class com.google.android.gms.**
+-dontwarn com.onesignal.**
+-dontwarn onesignal.**
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+  static ** CREATOR;
+}
+-keep public class com.bumptech.glide.**
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
+}

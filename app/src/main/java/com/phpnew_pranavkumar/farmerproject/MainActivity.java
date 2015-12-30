@@ -541,7 +541,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             OkHttpClient okHttpClient = new OkHttpClient();
-            Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newmoviejson").build();
+            Request request = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/newrelease").build();
             Request requestsec = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/popularmoviejson").build();
             Request requesttrd = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/english").build();
             Request requestfor = new Request.Builder().url("http://moviejson-pranavkumar.rhcloud.com/hindi").build();

@@ -16,9 +16,10 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.phpnew_pranavkumar.farmerproject"
 
@@ -36,13 +37,13 @@ android {
         renderscriptSupportModeEnabled true
 
     }
-
-
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
     }
 }
 
@@ -62,6 +63,6 @@ dependencies {
     compile 'com.onesignal:OneSignal:2.+@aar'
     compile 'com.google.android.gms:play-services-gcm:+'
     compile 'com.google.android.gms:play-services-analytics:+'
-    compile "com.google.android.gms:play-services-location:+"
+    compile 'com.google.android.gms:play-services-location:+'
     compile files('libs/StartAppInApp-3.3.0.jar')
 }

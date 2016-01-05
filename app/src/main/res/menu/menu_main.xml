@@ -28,4 +28,10 @@
         android:orderInCategory="100"
         android:title="OpenSource Licenses"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_privacy"
+        android:orderInCategory="100"
+        android:title="Privacy Policy"
+        app:showAsAction="never" />
 </menu>

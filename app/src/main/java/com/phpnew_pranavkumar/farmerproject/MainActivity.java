@@ -397,9 +397,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_home);
-        ab.setDisplayHomeAsUpEnabled(true);
+        //final ActionBar ab = getSupportActionBar();
+        //ab.setHomeAsUpIndicator(R.drawable.ic_home);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -510,6 +510,12 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
 
+            case R.id.action_privacy:
+
+                displayLicensesAlertDialogPrivacy();
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -518,6 +524,16 @@ public class MainActivity extends AppCompatActivity {
     private void displayLicensesAlertDialog() {
         WebView view = (WebView) LayoutInflater.from(this).inflate(R.layout.dailog_licenses, null);
         view.loadUrl("file:///android_asset/open_source_licenses.html");
+        AlertDialog mAlertDialog = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+                .setTitle("")
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
+    private void displayLicensesAlertDialogPrivacy() {
+        WebView view = (WebView) LayoutInflater.from(this).inflate(R.layout.dailog_licenses, null);
+        view.loadUrl("file:///android_asset/privacy_licenses.html");
         AlertDialog mAlertDialog = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
                 .setTitle("")
                 .setView(view)

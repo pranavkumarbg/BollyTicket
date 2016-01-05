@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/item_img"
         android:layout_width="match_parent"
-        android:layout_height="237dp"
+        android:layout_height="337dp"
         android:layout_margin="1dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />

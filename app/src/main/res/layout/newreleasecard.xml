@@ -42,7 +42,8 @@
         android:layout_height="34dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/transpernt">
 
         <TextView
             android:id="@+id/placeName"

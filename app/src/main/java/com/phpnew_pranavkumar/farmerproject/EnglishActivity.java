@@ -142,6 +142,8 @@ public class EnglishActivity extends AppCompatActivity {
 
             String url = feedMovieList.get(position).movieurl;
             String image = feedMovieList.get(position).moviethumbnail;
+            String name = feedMovieList.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);

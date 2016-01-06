@@ -200,6 +200,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 
             String url = feedMovieListnext.get(position).movieurl;
             String image = feedMovieListnext.get(position).moviethumbnail;
+            String name = feedMovieListnext.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);

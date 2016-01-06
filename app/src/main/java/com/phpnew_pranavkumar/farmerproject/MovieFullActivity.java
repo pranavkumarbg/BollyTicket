@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -69,6 +70,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     private Point backgroundImageTargetSize;
     String image;
     String flag;
+    String name;
+    TextView tv;
     Button watch, downlaod, send;
     RatingBar ratingBar;
     ProgressBar progressBar;
@@ -93,10 +96,14 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
         scrollView.setSmoothScrollingEnabled(true);
         imageView = (ImageView) findViewById(R.id.imageViewfull);
+        tv=(TextView)findViewById(R.id.textviewmy);
         Intent i = getIntent();
 
         flag = i.getStringExtra("flagurl");
         image = i.getStringExtra("flagimage");
+        name = i.getStringExtra("flagname");
+
+        tv.setText(name);
 
         watch = (Button) findViewById(R.id.Button04);
         downlaod = (Button) findViewById(R.id.Button05);
@@ -189,7 +196,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             public void onClick(View view) {
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", "bobbyrana1983@gmail.com", null));
+                        "mailto", "bollyticket@gmail.com", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, sendbar);
 
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));

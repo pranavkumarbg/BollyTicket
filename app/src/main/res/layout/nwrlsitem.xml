@@ -35,7 +35,8 @@
         android:layout_height="40dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/transpernt">
 
         <TextView
             android:id="@+id/placeName"

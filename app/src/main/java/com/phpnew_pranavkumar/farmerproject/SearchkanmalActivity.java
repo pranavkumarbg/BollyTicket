@@ -200,6 +200,8 @@ public class SearchkanmalActivity extends AppCompatActivity {
             String url1 = feedMovieListnext.get(position).movieurl1;
             String url2 = feedMovieListnext.get(position).movieurl2;
             String image = feedMovieListnext.get(position).moviethumbnail;
+            String name = feedMovieListnext.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);

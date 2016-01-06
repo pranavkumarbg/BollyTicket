@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.onesignal.OneSignal;
 import com.phpnew_pranavkumar.farmerproject.adapter.MovieegtAdapter;
@@ -397,9 +398,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //final ActionBar ab = getSupportActionBar();
-        //ab.setHomeAsUpIndicator(R.drawable.ic_home);
-        //ab.setDisplayHomeAsUpEnabled(true);
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -749,14 +748,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
-
             Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-
             String url = feedMovieList.get(position).movieurl;
             String image = feedMovieList.get(position).moviethumbnail;
+            String name = feedMovieList.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
+
             startActivity(transitionIntent);
             overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
@@ -774,6 +773,8 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsec.get(position).movieurl;
             String image = feedMovieListsec.get(position).moviethumbnail;
+            String name = feedMovieListsec.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -793,6 +794,8 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListtrd.get(position).movieurl;
             String image = feedMovieListtrd.get(position).moviethumbnail;
+            String name = feedMovieListtrd.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -812,6 +815,8 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListfor.get(position).movieurl;
             String image = feedMovieListfor.get(position).moviethumbnail;
+            String name = feedMovieListfor.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -833,6 +838,8 @@ public class MainActivity extends AppCompatActivity {
             String url1 = feedMovieListfiv.get(position).movieurl1;
             String url2 = feedMovieListfiv.get(position).movieurl2;
             String image = feedMovieListfiv.get(position).moviethumbnail;
+            String name = feedMovieListfiv.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);
@@ -854,6 +861,8 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsix.get(position).movieurl;
             String image = feedMovieListsix.get(position).moviethumbnail;
+            String name = feedMovieListsix.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -874,6 +883,8 @@ public class MainActivity extends AppCompatActivity {
 
             String url = feedMovieListsvn.get(position).movieurl;
             String image = feedMovieListsvn.get(position).moviethumbnail;
+            String name = feedMovieListsvn.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl", url);
             transitionIntent.putExtra("flagimage", image);
             startActivity(transitionIntent);
@@ -895,6 +906,8 @@ public class MainActivity extends AppCompatActivity {
             String url1 = feedMovieListegt.get(position).movieurl1;
             String url2 = feedMovieListegt.get(position).movieurl2;
             String image = feedMovieListegt.get(position).moviethumbnail;
+            String name = feedMovieListegt.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);

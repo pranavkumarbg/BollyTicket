@@ -138,6 +138,8 @@ public class MalayalamActivity extends AppCompatActivity {
             String url1 = feedMovieList.get(position).movieurl1;
             String url2 = feedMovieList.get(position).movieurl2;
             String image = feedMovieList.get(position).moviethumbnail;
+            String name = feedMovieList.get(position).moviename;
+            transitionIntent.putExtra("flagname", name);
             transitionIntent.putExtra("flagurl1", url1);
             transitionIntent.putExtra("flagurl2", url2);
             transitionIntent.putExtra("flagimage", image);

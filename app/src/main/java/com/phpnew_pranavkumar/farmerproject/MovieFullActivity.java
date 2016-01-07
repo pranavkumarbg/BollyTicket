@@ -286,7 +286,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
         Picasso.with(this).load(image)
                 .resize(backgroundImageTargetSize.x, backgroundImageTargetSize.y).centerCrop()
-                .transform(blurTransformation).error(R.drawable.video_placeholder).into((Target) this);
+                .transform(blurTransformation).error(R.drawable.mainbackground).into((Target) this);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

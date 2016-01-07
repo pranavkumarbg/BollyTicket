@@ -470,7 +470,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setIcon(R.mipmap.ic_launcher)
-                .setTitle("Closing App")
+                .setTitle("Bolly Ticket")
                 .setMessage("Are you sure you want to close this App?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -748,16 +748,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-            String url = feedMovieList.get(position).movieurl;
-            String image = feedMovieList.get(position).moviethumbnail;
-            String name = feedMovieList.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
+                String url = feedMovieList.get(position).movieurl;
+                String image = feedMovieList.get(position).moviethumbnail;
+                String name = feedMovieList.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
 
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
 
         }
@@ -768,18 +770,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-            String url = feedMovieListsec.get(position).movieurl;
-            String image = feedMovieListsec.get(position).moviethumbnail;
-            String name = feedMovieListsec.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url = feedMovieListsec.get(position).movieurl;
+                String image = feedMovieListsec.get(position).moviethumbnail;
+                String name = feedMovieListsec.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -789,18 +791,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-            String url = feedMovieListtrd.get(position).movieurl;
-            String image = feedMovieListtrd.get(position).moviethumbnail;
-            String name = feedMovieListtrd.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url = feedMovieListtrd.get(position).movieurl;
+                String image = feedMovieListtrd.get(position).moviethumbnail;
+                String name = feedMovieListtrd.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -810,18 +812,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-            String url = feedMovieListfor.get(position).movieurl;
-            String image = feedMovieListfor.get(position).moviethumbnail;
-            String name = feedMovieListfor.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url = feedMovieListfor.get(position).movieurl;
+                String image = feedMovieListfor.get(position).moviethumbnail;
+                String name = feedMovieListfor.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -832,20 +834,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
-
-            String url1 = feedMovieListfiv.get(position).movieurl1;
-            String url2 = feedMovieListfiv.get(position).movieurl2;
-            String image = feedMovieListfiv.get(position).moviethumbnail;
-            String name = feedMovieListfiv.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl1", url1);
-            transitionIntent.putExtra("flagurl2", url2);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url1 = feedMovieListfiv.get(position).movieurl1;
+                String url2 = feedMovieListfiv.get(position).movieurl2;
+                String image = feedMovieListfiv.get(position).moviethumbnail;
+                String name = feedMovieListfiv.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl1", url1);
+                transitionIntent.putExtra("flagurl2", url2);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -856,18 +858,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-            String url = feedMovieListsix.get(position).movieurl;
-            String image = feedMovieListsix.get(position).moviethumbnail;
-            String name = feedMovieListsix.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url = feedMovieListsix.get(position).movieurl;
+                String image = feedMovieListsix.get(position).moviethumbnail;
+                String name = feedMovieListsix.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -878,18 +880,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivity.class);
-
-            String url = feedMovieListsvn.get(position).movieurl;
-            String image = feedMovieListsvn.get(position).moviethumbnail;
-            String name = feedMovieListsvn.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl", url);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url = feedMovieListsvn.get(position).movieurl;
+                String image = feedMovieListsvn.get(position).moviethumbnail;
+                String name = feedMovieListsvn.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl", url);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };
@@ -900,20 +902,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
 
+            if (feedMovieList.size() > 0) {
+                Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
 
-            Intent transitionIntent = new Intent(getApplicationContext(), MovieFullActivityNew.class);
-
-            String url1 = feedMovieListegt.get(position).movieurl1;
-            String url2 = feedMovieListegt.get(position).movieurl2;
-            String image = feedMovieListegt.get(position).moviethumbnail;
-            String name = feedMovieListegt.get(position).moviename;
-            transitionIntent.putExtra("flagname", name);
-            transitionIntent.putExtra("flagurl1", url1);
-            transitionIntent.putExtra("flagurl2", url2);
-            transitionIntent.putExtra("flagimage", image);
-            startActivity(transitionIntent);
-            overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-
+                String url1 = feedMovieListegt.get(position).movieurl1;
+                String url2 = feedMovieListegt.get(position).movieurl2;
+                String image = feedMovieListegt.get(position).moviethumbnail;
+                String name = feedMovieListegt.get(position).moviename;
+                transitionIntent.putExtra("flagname", name);
+                transitionIntent.putExtra("flagurl1", url1);
+                transitionIntent.putExtra("flagurl2", url2);
+                transitionIntent.putExtra("flagimage", image);
+                startActivity(transitionIntent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
 
         }
     };

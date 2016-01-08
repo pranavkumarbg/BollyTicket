@@ -113,7 +113,6 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
     private StartAppAd startAppAd = new StartAppAd(this);
 
     private DemoPlayer player;
-    private DebugTextViewHelper debugViewHelper;
     private boolean playerNeedsPrepare;
 
     private long playerPosition;

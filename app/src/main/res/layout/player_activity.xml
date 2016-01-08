@@ -26,7 +26,8 @@
         android:id="@+id/startAppBanner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="top"
+        />
 
   <com.google.android.exoplayer.AspectRatioFrameLayout android:id="@+id/video_frame"
       android:layout_width="match_parent"

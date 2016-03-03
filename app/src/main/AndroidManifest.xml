@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2015 Pranavkumar Gorawar
+  ~ Copyright (C) 2016 Bolly Ticket
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.phpnew_pranavkumar.farmerproject">
+    package="com.bollyticket.movies">
 
     <supports-screens
         android:anyDensity="true"
@@ -32,14 +32,14 @@
 
 
     <application
-        android:name=".AppData"
+        android:name="com.bollyticket.movies.AppData"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.bollyticket.movies.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -50,40 +50,40 @@
         </activity>
 
         <activity
-            android:name=".NewReleaseActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.NewReleaseActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
 
         <activity
-            android:name=".PopularActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.PopularActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
         <activity
-            android:name=".MovieFullActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.MovieFullActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
 
         </activity>
 
         <activity
-            android:name=".PlayerActivity"
+            android:name="com.bollyticket.movies.PlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/PlayerTheme">
@@ -91,87 +91,87 @@
         </activity>
 
         <service
-            android:name=".services.MovieDownloadService"
+            android:name="com.bollyticket.movies.services.MovieDownloadService"
             android:exported="false" />
 
         <activity
-            android:name=".EnglishActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.EnglishActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
 
         </activity>
         <activity
-            android:name=".HindiActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.HindiActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
 
         </activity>
         <activity
-            android:name=".KannadaActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.KannadaActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchkanmalActivity" />
         </activity>
         <activity
-            android:name=".TeluguActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.TeluguActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
 
         </activity>
         <activity
-            android:name=".TamilActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.TamilActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
 
         </activity>
         <activity
-            android:name=".MalayalamActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.MalayalamActivity"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchkanmalActivity" />
 
         </activity>
         <activity
-            android:name=".MovieFullActivityNew"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.MovieFullActivityNew"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
 
         </activity>
 
@@ -192,7 +192,7 @@
 
 
         <activity
-            android:name=".SearchResultsActivity"
+            android:name="com.bollyticket.movies.SearchResultsActivity"
             android:label="search"
             android:launchMode="singleTop">
 
@@ -208,7 +208,7 @@
         </activity>
 
         <activity
-            android:name=".SearchkanmalActivity"
+            android:name="com.bollyticket.movies.SearchkanmalActivity"
             android:label="search"
             android:launchMode="singleTop">
 
@@ -224,12 +224,12 @@
         </activity>
 
         <activity
-            android:name=".AboutUs"
-            android:parentActivityName=".MainActivity"
+            android:name="com.bollyticket.movies.AboutUs"
+            android:parentActivityName="com.bollyticket.movies.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.bollyticket.movies.MainActivity" />
 
         </activity>
 

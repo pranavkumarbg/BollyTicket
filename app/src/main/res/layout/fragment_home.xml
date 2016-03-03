@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (C) 2015 Pranavkumar Gorawar
+  ~ Copyright (C) 2016 Bolly Ticket
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
 
-        <com.phpnew_pranavkumar.farmerproject.utils.CirclePageIndicator
+        <com.bollyticket.movies.utils.CirclePageIndicator
             android:id="@+id/indicator"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

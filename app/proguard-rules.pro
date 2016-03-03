@@ -15,7 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
+-ignorewarnings
 -dontskipnonpubliclibraryclasses
 -dontobfuscate
 -forceprocessing
@@ -30,7 +30,6 @@
 -dontwarn com.squareup.okhttp.**
 -dontwarn com.squareup.okio.**
 -dontwarn okio.**
--dontwarn com.startapp.**
 -dontwarn com.google.android.gms.**
 -dontwarn com.onesignal.**
 -dontwarn onesignal.**
@@ -44,12 +43,26 @@
 -keep public class com.onesignal.**
 -keep public class com.squareup.**
 -keep public class com.startapp.** { *; }
--keep interface com.startapp.** { *; }
 -keep class com.viewpagerindicator.** { *; }
 -keep interface com.viewpagerindicator.** { *; }
 
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
+}
+
+-keep class com.startapp.** {
+      *;
+}
+
+-keepattributes Exceptions, InnerClasses, Signature, Deprecated, SourceFile,LineNumberTable, *Annotation*, EnclosingMethod
+-dontwarn android.webkit.JavascriptInterface
+-dontwarn com.startapp.**
+
+
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
 }
 
 -keep class org.parceler.Parceler$$Parcels

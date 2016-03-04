@@ -108,20 +108,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:text="WATCH NOW"
-                    android:theme="@style/Button.Tinted">
-
-                </Button>
-
-
-                <Button
-                    android:id="@+id/Button05"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:text="DOWNLOAD"
+                    android:text="WATCH NOW"
                     android:theme="@style/Button.Tinted">
 
                 </Button>

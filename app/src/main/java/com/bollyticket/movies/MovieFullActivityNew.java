@@ -70,7 +70,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
     String flag1, flag2;
     String name;
     TextView tv;
-    Button watch, downlaod, send;
+    Button watch, send;
     ProgressBar progressBar;
     String sendbar;
     RatingBar ratingBar;
@@ -108,7 +108,6 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
         tv.setText(name);
 
         watch = (Button) findViewById(R.id.Button04);
-        downlaod = (Button) findViewById(R.id.Button05);
         ratingBar = (RatingBar) findViewById(R.id.rating);
         send = (Button) findViewById(R.id.buttonsend);
 
@@ -283,62 +282,7 @@ public class MovieFullActivityNew extends AppCompatActivity implements Target {
             }
         });
 
-        downlaod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MovieFullActivityNew.this, R.style.MyDialogTheme);
-
-
-                builder.setTitle("Choose One")
-
-
-                        .setSingleChoiceItems(R.array.choices, 0, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-
-
-                            }
-
-                        })
-
-                        .setPositiveButton("Download", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-
-                                if (selectedPosition == 0) {
-
-                                    Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                                    intent.putExtra("movie", flag1);
-                                    startService(intent);
-                                    Toast.makeText(getApplicationContext(), "Wait for Next Version", Toast.LENGTH_LONG).show();
-
-
-                                } else {
-
-                                    Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                                    intent.putExtra("movie", flag2);
-                                    startService(intent);
-                                    Toast.makeText(getApplicationContext(), "Wait for Next Version", Toast.LENGTH_LONG).show();
-                                }
-
-
-                            }
-                        })
-
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        })
-
-                        .show();
-            }
-        });
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

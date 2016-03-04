@@ -72,7 +72,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     String flag;
     String name;
     TextView tv;
-    Button watch, downlaod, send;
+    Button watch, send;
     RatingBar ratingBar;
     ProgressBar progressBar;
     String sendbar;
@@ -106,7 +106,6 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         tv.setText(name);
 
         watch = (Button) findViewById(R.id.Button04);
-        downlaod = (Button) findViewById(R.id.Button05);
         ratingBar = (RatingBar) findViewById(R.id.rating);
         send = (Button) findViewById(R.id.buttonsend);
 
@@ -169,18 +168,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             }
         });
 
-        downlaod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), MovieDownloadService.class);
-                intent.putExtra("movie", flag);
-                startService(intent);
-                Toast.makeText(getApplicationContext(), "Wait for Next Version", Toast.LENGTH_LONG).show();
-
-
-            }
-        });
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

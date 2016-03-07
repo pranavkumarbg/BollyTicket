@@ -481,8 +481,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
 
-            startAppAd.onBackPressed();
-    }
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

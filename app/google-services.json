@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1041060298772",
+    "firebase_url": "https://bolly-ticket-4d002.firebaseio.com",
+    "project_id": "bolly-ticket-4d002",
+    "storage_bucket": "bolly-ticket-4d002.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041060298772:android:652f9c3a47cb2479",
+        "android_client_info": {
+          "package_name": "com.bollyticket.movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041060298772-55g4n9g5juo2jkcdfi8fe8eiaemcsgnt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bollyticket.movies",
+            "certificate_hash": "4EACA0E91029820FACFE36572B8FA369DE52D8D8"
+          }
+        },
+        {
+          "client_id": "1041060298772-c4vfvt8lcibirshu13kc7r0pok6crv6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxZ03aZuCUgLI2GN02GU7SU8dxkLB5LbM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041060298772-c4vfvt8lcibirshu13kc7r0pok6crv6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

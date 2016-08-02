@@ -49,6 +49,10 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bollyticket.movies.services.MovieDownloadService;
 import com.bollyticket.movies.utils.BlurTransformation;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.startapp.android.publish.StartAppAd;
@@ -59,6 +63,9 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
     ImageView imageView;
     private StartAppAd startAppAd = new StartAppAd(this);
+
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     private static final int BACKGROUND_IMAGES_WIDTH = 360;
     private static final int BACKGROUND_IMAGES_HEIGHT = 360;
@@ -81,6 +88,18 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.moviefullview);
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        AdRequest adRequestinterstitial = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequestinterstitial);
+
+
 
         progressBar = (ProgressBar) findViewById(R.id.progressbarfull);
         blurTransformation = new BlurTransformation(this, BLUR_RADIUS);
@@ -148,6 +167,8 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
                                 break;
                             case 1:
 
+
+
                                 Uri intentUri = Uri.parse(flag);
 
                                 Intent intent = new Intent();
@@ -208,6 +229,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
         switch (id) {
 
             case android.R.id.home:
+                startAppAd.onBackPressed();
                 finish();
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
@@ -223,13 +245,18 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
         handler.removeCallbacksAndMessages(null);
 
-
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         startAppAd.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
 
@@ -243,6 +270,9 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
 
     @Override
     protected void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
     }
@@ -256,8 +286,11 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         changeBackground(new BitmapDrawable(getResources(), bitmap));
         progressBar.setVisibility(View.GONE);
-        startAppAd.showAd();
-        startAppAd.loadAd();
+
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+        }
 
     }
 
@@ -320,6 +353,7 @@ public class MovieFullActivity extends AppCompatActivity implements Target {
             screenSize.y = display.getHeight();
         }
     }
+
 
 
 }

@@ -17,10 +17,13 @@ package com.bollyticket.movies;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -90,10 +93,13 @@ public class AppData extends Application {
             try {
                 if (additionalData != null) {
 
+
                 }
             } catch (Throwable t) {
                 t.printStackTrace();
             }
+
+
         }
     }
 }

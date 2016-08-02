@@ -36,7 +36,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.onesignal.OneSignal;
 import com.bollyticket.movies.adapter.MovieegtAdapter;
 import com.bollyticket.movies.adapter.MoviefivAdapter;
@@ -66,6 +72,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     private Fragment contentFragment;
     HomeFragment homeFragment;
 
@@ -103,6 +111,23 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        MobileAds.initialize(this, "ca-app-pub-7812011019326769~8478292933");
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        AdRequest adRequestinterstitial = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequestinterstitial);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                showInterstitial();
+            }
+        });
 
         OneSignal.enableNotificationsWhenActive(true);
 
@@ -140,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -155,8 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ipp);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
 
             }
         });
@@ -171,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ie);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -186,8 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ih);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -201,8 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ik);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -215,8 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(itlgu);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -229,8 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(itml);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -243,8 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -259,8 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -273,8 +289,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -287,8 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -301,8 +315,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -315,8 +328,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -329,8 +341,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(imal);
                 overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 
-                startAppAd.showAd();
-                startAppAd.loadAd();
+
             }
         });
 
@@ -426,16 +437,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
         startAppAd.onResume();
 
     }
 
     @Override
     public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
         super.onPause();
         startAppAd.onPause();
     }
 
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -923,4 +947,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    private void showInterstitial() {
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+        }
+    }
 }

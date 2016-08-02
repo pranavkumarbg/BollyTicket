@@ -65,4 +65,8 @@
         <item>External player</item>
 
     </string-array>
+
+    <string name="banner_ad_unit_id">ca-app-pub-7812011019326769/9955026137</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-7812011019326769/9815425337</string>
+
 </resources>

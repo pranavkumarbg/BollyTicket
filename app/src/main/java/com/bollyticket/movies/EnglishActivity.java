@@ -28,15 +28,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bollyticket.movies.adapter.PopularAdapter;
 import com.bollyticket.movies.bean.MovieData;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.startapp.android.publish.StartAppAd;
 
 import java.util.ArrayList;
 
 public class EnglishActivity extends AppCompatActivity {
 
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     PopularAdapter mAdapter;
@@ -55,6 +62,23 @@ public class EnglishActivity extends AppCompatActivity {
         final ActionBar ab = getSupportActionBar();
         ab.setTitle("English Movies");
         ab.setDisplayHomeAsUpEnabled(true);
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        AdRequest adRequestinterstitial = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequestinterstitial);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                showInterstitial();
+            }
+        });
+
 
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
@@ -83,18 +107,34 @@ public class EnglishActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         startAppAd.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         startAppAd.onPause();
+        if (mAdView != null) {
+            mAdView.pause();
+        }
     }
 
     @Override
     public void onBackPressed() {
         startAppAd.onBackPressed();
+
         super.onBackPressed();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -123,6 +163,7 @@ public class EnglishActivity extends AppCompatActivity {
         switch (id) {
 
             case android.R.id.home:
+                startAppAd.onBackPressed();
                 finish();
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
@@ -152,5 +193,12 @@ public class EnglishActivity extends AppCompatActivity {
 
         }
     };
+
+    private void showInterstitial() {
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+        }
+    }
 
 }

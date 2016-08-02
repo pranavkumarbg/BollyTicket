@@ -63,6 +63,8 @@ import com.bollyticket.movies.player.HlsRendererBuilder;
 import com.bollyticket.movies.player.SmoothStreamingRendererBuilder;
 import com.bollyticket.movies.player.SmoothStreamingTestMediaDrmCallback;
 import com.bollyticket.movies.player.WidevineTestMediaDrmCallback;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.startapp.android.publish.StartAppAd;
 
 import java.net.CookieHandler;
@@ -122,6 +124,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
     private String contentId;
 
     private AudioCapabilitiesReceiver audioCapabilitiesReceiver;
+    private AdView mAdView;
 
 
     @Override
@@ -137,6 +140,10 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
 
         setContentView(R.layout.player_activity);
 
+        mAdView = (AdView) findViewById(R.id.ad_view);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         View root = findViewById(R.id.root);
         root.setOnTouchListener(new OnTouchListener() {
@@ -200,10 +207,7 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+
 
     @Override
     public void onPause() {

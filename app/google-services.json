@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1041060298772",
-    "firebase_url": "https://bolly-ticket-4d002.firebaseio.com",
-    "project_id": "bolly-ticket-4d002",
-    "storage_bucket": "bolly-ticket-4d002.appspot.com"
+    "project_number": "351932393139",
+    "firebase_url": "https://movies-desi.firebaseio.com",
+    "project_id": "movies-desi",
+    "storage_bucket": "movies-desi.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1041060298772:android:652f9c3a47cb2479",
+        "mobilesdk_app_id": "1:351932393139:android:ff1ddb86bdde50d5",
         "android_client_info": {
-          "package_name": "com.bollyticket.movies"
+          "package_name": "com.bollyticket.desi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1041060298772-55g4n9g5juo2jkcdfi8fe8eiaemcsgnt.apps.googleusercontent.com",
+          "client_id": "351932393139-3aihr88scoe5m096te0gvdvglqj6ul6u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bollyticket.movies",
-            "certificate_hash": "4EACA0E91029820FACFE36572B8FA369DE52D8D8"
+            "package_name": "com.bollyticket.desi",
+            "certificate_hash": "B09F8C4C6D3125088F318390914E5D6E36C55680"
           }
         },
         {
-          "client_id": "1041060298772-c4vfvt8lcibirshu13kc7r0pok6crv6r.apps.googleusercontent.com",
+          "client_id": "351932393139-kv7bmhb525h3m028ffukqiasa9r061sv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDxZ03aZuCUgLI2GN02GU7SU8dxkLB5LbM"
+          "current_key": "AIzaSyDbxjcwf-y-ueQiZkAWIF-M4hEnSHqZuAg"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1041060298772-c4vfvt8lcibirshu13kc7r0pok6crv6r.apps.googleusercontent.com",
+              "client_id": "351932393139-kv7bmhb525h3m028ffukqiasa9r061sv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
